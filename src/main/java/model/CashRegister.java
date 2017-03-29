@@ -1,6 +1,8 @@
 package model;
 
+import java.util.List;
+
 public class CashRegister {
-	List<Request>
+	List<Request> requests;
 
 }
