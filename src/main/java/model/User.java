@@ -11,6 +11,18 @@ public class User {
 		
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setAccessLevel(AccessLevel accessLevel) {
+		this.accessLevel = accessLevel;
+	}
+
 	public User(String username, String password, AccessLevel accessLevel){
 		this.accessLevel 	= accessLevel;
 		this.username 		= username;
