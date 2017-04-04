@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingList {
@@ -7,6 +8,9 @@ public class ShoppingList {
 	private List<ListItem> list;
 	
 	public List<ListItem> getListItemList(){
+		if(list == null){
+			return new ArrayList<>();
+		}
 		return list;
 	}
 	
