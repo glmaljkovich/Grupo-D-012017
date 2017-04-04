@@ -30,9 +30,6 @@ public class ListItem {
 		this.quantity = quantity;
 	}
 	
-	public void setProcessed(){
-		this.processed=true;
-	}
 	public int getTime(){
 		return this.product.getTime()*this.quantity;
 	}

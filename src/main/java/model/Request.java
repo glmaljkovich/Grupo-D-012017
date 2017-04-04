@@ -1,8 +1,11 @@
 package model;
 
+import java.util.List;
+
 public class Request {
 	private Client client;
 	private ShoppingList shoppingList;
+	private int duration;
 	
 	public Request(){
 		
@@ -19,13 +22,15 @@ public class Request {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public ShoppingList getList() {
-		return shoppingList;
+	public List<ListItem> getList() {
+		return shoppingList.getListItem();
 	}
 	public void setList(ShoppingList list) {
 		this.shoppingList = list;
 	}
-	
-	
+	public int timeRequest(){
+		this.getList().forEach(product -> duration += product.getTime());
+		return duration;
+	}
 	
 }
