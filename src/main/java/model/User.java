@@ -13,8 +13,12 @@ public class User {
 	
 	public User(String username, String password, AccessLevel accessLevel){
 		this.accessLevel 	= accessLevel;
-		this.setUsername(username);
-		this.setPassword(password);
+		this.username 		= username;
+		this.password 		= password;
+	}
+
+	public AccessLevel getAccessLevel() {
+		return accessLevel;
 	}
 
 	public String getUsername() {
