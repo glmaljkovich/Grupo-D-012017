@@ -9,7 +9,6 @@ public class Product {
 	private String image;
 	private String category;
 	
-	
 	public Product(String ID,String name,String brand,int stock,Price price,String image,String category){
 		this.ID = ID;
 		this.name = name;
@@ -33,4 +32,5 @@ public class Product {
 	public int getTime(){
 		return 1;
 	}
+	
 }

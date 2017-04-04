@@ -1,8 +1,9 @@
 package model;
 
 public class ListItem {
-	Product product;
-	int quantity;
+	private Product product;
+	private int quantity;
+	private boolean processed;
 	
 	public ListItem(){
 		
@@ -29,6 +30,11 @@ public class ListItem {
 		this.quantity = quantity;
 	}
 	
-	
+	public void setProcessed(){
+		this.processed=true;
+	}
+	public int getTime(){
+		return this.product.getTime()*this.quantity;
+	}
 	
 }

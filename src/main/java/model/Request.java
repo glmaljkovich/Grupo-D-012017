@@ -26,4 +26,6 @@ public class Request {
 		this.shoppingList = list;
 	}
 	
+	
+	
 }

@@ -1,21 +1,24 @@
 package model;
 
 import java.util.List;
+import java.util.Queue;
 
 public class CashRegister {
-	List<Request> requests;
+	Queue<Request> requests;
 	int waitingTime;
 	
-	public int estimatedWaitingTime(Request request){
+	public int estimatedWaitingTime(){
 		return this.waitingTime;
 	}
+	public int proccessRequests(){
+		this.processRequest(requests.poll());
+//		this.totalTimeProducts(requests.getList());
+//		return this.waitingTime;
+		return waitingTime;
+	}
 	
-//	public void proccessRequest(Request request){
-//		this.totalTimeProducts(request.getList());
-//	}
-//	public void proccessProduct(Product product){
-//		product.getTime();
-//	}
-	
+	private void processRequest(Request request){
+		
+	}
 	
 }
