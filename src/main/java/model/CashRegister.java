@@ -10,22 +10,27 @@ public class CashRegister {
 	public int estimatedWaitingTime(){
 		return waitingTime;
 	}
+	
 	private void processRequest(Request request){
 		request.getList().forEach(product -> waitingTime -= product.getTime());
 	}
+	
 	public void addRequest(Request request){
 		requests.add(request);
-		this.increaseWaitingTime(request.timeRequest());
+		this.increaseWaitingTime(request.getDuration());
 		processRequest(requests.poll());
 	}
+	
 	public void increaseWaitingTime(int duration){
-		waitingTime+=duration;
+		this.waitingTime+=duration;
 	}
+	
 	public void deleteRequest(Request request){
-		requests.remove(request);
+		this.requests.remove(request);
 	}
+	
 	public int totalTimeRequests(){
-		requests.forEach(request -> waitingTime += request.timeRequest());
+		this.requests.forEach(request -> waitingTime += request.getDuration());
 		return waitingTime;
 	}
 

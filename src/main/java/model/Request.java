@@ -14,22 +14,29 @@ public class Request {
 	public Request(Client client, ShoppingList shoppingList) {
 		this.client = client;
 		this.shoppingList = shoppingList;
+		this.setDuration();
+	}
+	
+	private void setDuration(){
+		this.getList().forEach(product -> duration += product.getTime());
 	}
 
 	public Client getClient() {
 		return client;
 	}
+	
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	
 	public List<ListItem> getList() {
-		return shoppingList.getListItem();
+		return shoppingList.getListItemList();
 	}
-	public void setList(ShoppingList list) {
+	
+	public void setShoppingList(ShoppingList list) {
 		this.shoppingList = list;
 	}
-	public int timeRequest(){
-		this.getList().forEach(product -> duration += product.getTime());
+	public int getDuration(){
 		return duration;
 	}
 	

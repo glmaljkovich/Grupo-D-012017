@@ -6,7 +6,7 @@ public class ShoppingList {
 	private int id;
 	private List<ListItem> list;
 	
-	public List<ListItem> getListItem(){
+	public List<ListItem> getListItemList(){
 		return list;
 	}
 	
