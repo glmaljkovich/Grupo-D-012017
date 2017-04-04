@@ -1,14 +1,17 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingList {
 	private int id;
-	private List<ListItem> listItem;
+	private List<ListItem> list;
 	
 	public ShoppingList(int id, List<ListItem> listItem){
 		this.id = id;
-		this.listItem = listItem;
+		this.list = listItem;
+	}
+	public ShoppingList(){
 	}
 	public int getId() {
 		return id;
@@ -17,13 +20,16 @@ public class ShoppingList {
 		this.id = id;
 	}
 	public List<ListItem> getListItem() {
-		return listItem;
+		return list;
 	}
 	public void setListItem(List<ListItem> listItem) {
-		this.listItem = listItem;
+		this.list = listItem;
 	}
 	public List<ListItem> getListItemList(){
-		return this.listItem;
+		if(list == null){
+			return new ArrayList<>();
+		}
+		return list;
 	}
 	
 	
