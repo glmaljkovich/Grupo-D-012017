@@ -3,7 +3,6 @@ package model;
 public class ListItem {
 	private Product product;
 	private int quantity;
-	private boolean processed;
 	
 	public ListItem(){
 		
@@ -13,15 +12,7 @@ public class ListItem {
 		this.product 	= product;
 		this.quantity 	= quantity;
 	}
-
-	public boolean isProcessed() {
-		return processed;
-	}
-
-	public void setProcessed(boolean processed) {
-		this.processed = processed;
-	}
-
+	
 	public Product getProduct() {
 		return product;
 	}

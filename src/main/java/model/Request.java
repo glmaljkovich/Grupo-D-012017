@@ -39,5 +39,13 @@ public class Request {
 	public int getDuration(){
 		return duration;
 	}
+
+	public ShoppingList getShoppingList() {
+		return shoppingList;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 	
 }

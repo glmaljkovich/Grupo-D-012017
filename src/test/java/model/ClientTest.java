@@ -37,5 +37,4 @@ public class ClientTest {
 		client.setAddress(address);
 		assertEquals(address, client.getAddress());
 	}
-
 }

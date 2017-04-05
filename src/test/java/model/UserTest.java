@@ -22,30 +22,24 @@ public class UserTest {
 	@Test
 	public void testSetUsername() {
 		user.setUsername(username);
-		
 		assertEquals(username, user.getUsername());
 	}
 	
 	@Test
 	public void testSetPassword() {		
 		user.setPassword(password);
-		
 		assertEquals(password, user.getPassword());
 	}
 	
 	@Test
 	public void testSetId() {		
 		user.setId(1);
-		
 		assertEquals(1, user.getId());
 	}
 	
 	@Test
 	public void testGetAccessLevel() {
 		User user2 = new User(username, password, level);
-		
 		assertEquals(level, user2.getAccessLevel());
 	}
-	
-
 }
