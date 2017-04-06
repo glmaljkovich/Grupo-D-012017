@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+  <head>
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script type="text/javascript">
+
+var map;
+function initMap() { 
+  var myLatLngOrigin = {lat: -34.706543, lng: -58.278538};
+  var myLatLngDestination = {lat: -34.709405, lng: -58.280486};
+
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLngOrigin,
+          scrollwheel: false,
+          zoom: 15
+        });
+
+        // Create a marker and set its position.
+        var markerOrigin = new google.maps.Marker({
+          map: map,
+          position: myLatLngOrigin,
+          title: 'Source'
+        });
+
+        var markerDestination = new google.maps.Marker({
+          map: map,
+          position: myLatLngDestination,
+          title: 'Target'
+        });
+}
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUaMNJpJ1R73S-wnnn--P6fwZZ6eHQiM4&callback=initMap">
+    </script>
+  </body>
+</html>
