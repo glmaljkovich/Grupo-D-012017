@@ -7,7 +7,6 @@ public class Client extends User {
 	private List<ShoppingList> shoppingLists;
 	private String address;
 	
-	
 	public Client(){
 		
 	}
@@ -44,6 +43,5 @@ public class Client extends User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 	
 }

@@ -3,8 +3,8 @@ package model;
 import java.util.Queue;
 
 public class CashRegister {
-	Queue<Request> requests;
-	int waitingTime;
+	private Queue<Request> requests;
+	private int waitingTime;
 	
 	public int estimatedWaitingTime(){
 		return waitingTime;
