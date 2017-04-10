@@ -28,8 +28,8 @@ public class ProductOffer extends Offer {
 
     @Override
     public boolean appliesTo(ShoppingList list) {
-        // TODO
-        return false;
+
+        return list.getItems().stream().anyMatch(item -> item.getProduct().equals(this.getProduct()));
     }
 
     public Product getProduct() {

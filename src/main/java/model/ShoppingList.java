@@ -24,11 +24,7 @@ public class ShoppingList {
 		this.id = id;
 	}
 
-	public List<ListItem> getList() {
-		return list;
-	}
-
-	public void setList(List<ListItem> listItem) {
+	public void setItems(List<ListItem> listItem) {
 		this.list = listItem;
 	}
 

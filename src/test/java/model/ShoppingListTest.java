@@ -31,10 +31,10 @@ public class ShoppingListTest {
     }
 
     @Test
-    public void setList() throws Exception {
-        shoppingList.setList(list);
+    public void setItems() throws Exception {
+        shoppingList.setItems(list);
 
-        assertEquals(list, shoppingList.getList());
+        assertEquals(list, shoppingList.getItems());
     }
 
 }
