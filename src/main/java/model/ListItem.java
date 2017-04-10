@@ -3,14 +3,16 @@ package model;
 public class ListItem {
 	private Product product;
 	private int quantity;
-	
+	private boolean checked;
+
 	public ListItem(){
-		
+		this.checked = false;
 	}
 	
 	public ListItem(Product product, int quantity) {
 		this.product 	= product;
 		this.quantity 	= quantity;
+		this.checked 	= false;
 	}
 	
 	public Product getProduct() {
@@ -31,6 +33,14 @@ public class ListItem {
 	
 	public int getTime(){
 		return this.product.getTime()*this.quantity;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 	
 }

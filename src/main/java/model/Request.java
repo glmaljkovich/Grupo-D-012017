@@ -1,5 +1,7 @@
 package model;
 
+import model.user.Client;
+
 import java.util.List;
 
 public class Request {
@@ -30,7 +32,7 @@ public class Request {
 	}
 	
 	public List<ListItem> getList() {
-		return shoppingList.getListItemList();
+		return shoppingList.getItems();
 	}
 	
 	public void setShoppingList(ShoppingList list) {

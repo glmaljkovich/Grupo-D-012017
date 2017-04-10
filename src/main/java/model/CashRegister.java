@@ -1,36 +1,54 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class CashRegister {
 	private Queue<Request> requests;
 	private int waitingTime;
-	
-	public int estimatedWaitingTime(){
-		return waitingTime;
+	private int id;
+
+	public CashRegister() {
+		this.waitingTime 	= 0;
+		this.requests 		= new LinkedList<>();
 	}
 	
-	private void processRequest(Request request){
-		request.getList().forEach(product -> waitingTime -= product.getTime());
+	public void processNextRequest(){
+		Request nextRequest = requests.poll();
+		nextRequest.getList().forEach(product -> this.decreaseWaitingTime(product.getTime()));
 	}
 	
 	public void addRequest(Request request){
 		requests.add(request);
 		this.increaseWaitingTime(request.getDuration());
-		processRequest(requests.poll());
 	}
-	
-	public void increaseWaitingTime(int duration){
+
+	public void setWaitingTime(int waitingTime) {
+		this.waitingTime = waitingTime;
+	}
+
+	private void decreaseWaitingTime(int duration){
+		this.waitingTime -= duration;
+	}
+
+	private void increaseWaitingTime(int duration){
 		this.waitingTime+=duration;
 	}
 	
-	public void deleteRequest(Request request){
+	public void removeRequest(Request request){
 		this.requests.remove(request);
+		this.decreaseWaitingTime(request.getDuration());
 	}
 	
-	public int totalTimeRequests(){
-		this.requests.forEach(request -> waitingTime += request.getDuration());
+	public int getWaitingTime(){
 		return waitingTime;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

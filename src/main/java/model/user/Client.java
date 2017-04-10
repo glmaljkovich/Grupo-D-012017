@@ -1,11 +1,13 @@
-package model;
+package model.user;
+
+import model.ShoppingList;
 
 import java.util.List;
 
 public class Client extends User {
 	private boolean firstTime;
 	private List<ShoppingList> shoppingLists;
-	private String address;
+	private Profile profile;
 	
 	public Client(){
 		
@@ -36,12 +38,12 @@ public class Client extends User {
 		this.shoppingLists = shoppingLists;
 	}
 
-	public String getAddress() {
-		return address;
+	public Profile getProfile() {
+		return profile;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 	
 }

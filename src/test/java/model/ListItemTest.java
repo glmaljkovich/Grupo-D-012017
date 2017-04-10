@@ -1,6 +1,8 @@
 package model;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
@@ -12,40 +14,43 @@ public class ListItemTest {
 	private ListItem listItem;
 	private Product product;
 	private int quantity;
-	private Product productTwo;
-	private Price price;
+	private int time;
 
 	@Before
 	public void setUp(){
-		product = new Product();
-		quantity = 10;
-		listItem = new ListItem();
+		product 	= mock(Product.class);
+		quantity 	= 10;
+		time 		= 5;
+		listItem 	= new ListItem();
+
+		when(product.getTime()).thenReturn(time);
 		
 	}
 	
 	@Test
 	public void testProductListItem() {
 		listItem.setProduct(product);
-		assertEquals(product,listItem.getProduct());
+		assertEquals(product, listItem.getProduct());
 	}
 	
 	@Test
 	public void testQuantityListItem() {
 		listItem.setQuantity(quantity);
-		assertEquals(10,listItem.getQuantity());
+		assertEquals(quantity, listItem.getQuantity());
 	}
-	
+
 	@Test
-	public void testListItem() {
-		product = new Product();
-		productTwo = new Product("10","cindor","Cindor",100,this.price,"","Lacteos");
-		quantity = 100;
-		listItem = new ListItem(product,quantity);
-		
-		assertEquals(100,listItem.getQuantity());
-		assertEquals(product,listItem.getProduct());
-		listItem.setQuantity(48);
-		listItem.setProduct(productTwo);
-		assertEquals(productTwo,listItem.getProduct());
+	public void testGetTime() throws Exception {
+		listItem.setProduct(product);
+		listItem.setQuantity(quantity);
+
+		assertEquals(time*quantity, listItem.getTime());
+	}
+
+	@Test
+	public void testSetChecked() throws Exception {
+		listItem.setChecked(true);
+
+		assertTrue(listItem.isChecked());
 	}
 }

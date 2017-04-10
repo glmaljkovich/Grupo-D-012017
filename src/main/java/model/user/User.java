@@ -1,11 +1,11 @@
-package model;
+package model.user;
 
 public class User {
 	private int id;
 	private String username;
 	private String password;
 	private String email;
-	protected AccessLevel accessLevel;
+	private AccessLevel accessLevel;
 	
 	public User(){
 		

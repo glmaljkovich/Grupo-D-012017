@@ -1,4 +1,4 @@
-package model;
+package model.user;
 
 import static org.junit.Assert.*;
 
@@ -10,12 +10,14 @@ public class UserTest {
 	private String password;
 	private String username;
 	private AccessLevel level;
+	private String email;
 	
 	@Before
 	public void setUp(){
 		user 		= new User();
 		username 	= "pepe";
 		password 	= "1234";
+		email 		= "pe@pe.com";
 		level 		= AccessLevel.ADMIN;
 	}
 
@@ -39,7 +41,22 @@ public class UserTest {
 	
 	@Test
 	public void testGetAccessLevel() {
-		User user2 = new User(username, password, level);
-		assertEquals(level, user2.getAccessLevel());
+		user = new User(username, password, level);
+
+		assertEquals(level, user.getAccessLevel());
+	}
+
+	@Test
+	public void testSetAccessLevel() throws Exception {
+		user.setAccessLevel(level);
+
+		assertEquals(level, user.getAccessLevel());
+	}
+
+	@Test
+	public void testSetEmail() throws Exception {
+		user.setEmail(email);
+
+		assertEquals(email, user.getEmail());
 	}
 }
