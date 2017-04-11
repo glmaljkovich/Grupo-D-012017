@@ -7,23 +7,14 @@ public class CashRegister {
 	private Queue<Request> requests;
 	private int waitingTime;
 	private int id;
-	private boolean express;
 
 	public CashRegister() {
 		this.waitingTime 	= 0;
 		this.requests 		= new LinkedList<>();
-		this.express = false;
-	}
-	
-	public boolean isExpress() {
-		return this.express;
 	}
 
 	public boolean acceptRequest(Request request){
-		return (this.isExpress() && request.getSizeShoppingList() < 10) || ((!this.isExpress()) && request.getSizeShoppingList() > 10);
-	}
-	public void setExpress(boolean express) {
-		this.express = express;
+		return true;
 	}
 
 	public void processNextRequest(){

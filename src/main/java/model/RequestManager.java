@@ -1,37 +1,47 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RequestManager {
 
-	private List<CashRegister> listCashRegister;
-	private List<CashRegister> listCashRegisterAcceptRequest;
-	private CashRegister cashRegister;
+	private List<CashRegister> cashRegisterList;
 	
-	RequestManager(List<CashRegister> listCashRegister){
-		this.listCashRegister = listCashRegister;
+	public RequestManager(List<CashRegister> cashRegisterList){
+		this.cashRegisterList = cashRegisterList;
 	}
 	
-	public CashRegister getCashRegisterTimeLess(){
-		this.cashRegister = this.listCashRegisterAcceptRequest.get(0);
-		for(int i = 0; i < this.listCashRegisterAcceptRequest.size(); i++){
-			if(this.cashRegister.getWaitingTime() > this.listCashRegisterAcceptRequest.get(i).getWaitingTime()){
-				this.cashRegister = this.listCashRegisterAcceptRequest.get(i);
-			}
+	public CashRegister getCashRegisterWithLesserWaitingTime(Request request) throws NoCashRegisterAvailableException {
+		Optional<CashRegister> result = this.getCashRegistersForRequest(request)
+											.stream()
+											.reduce(this::compareCashRegistersByWaitingTime);
+		if(! result.isPresent()){
+			throw new NoCashRegisterAvailableException();
 		}
-		return this.cashRegister;
+
+		return result.get();
 	}
 
-	public List<CashRegister> getCashRegistersAcceptRequest(Request request){
-		listCashRegisterAcceptRequest = new ArrayList<>();
-		for(int i = 0; i < this.listCashRegister.size(); i++){
-			if(this.listCashRegister.get(i).acceptRequest(request)){
-				listCashRegisterAcceptRequest.add(this.listCashRegister.get(i));
-			}
-		}
-		return listCashRegisterAcceptRequest;
+	private CashRegister compareCashRegistersByWaitingTime(CashRegister cashRegister1, CashRegister cashRegister2) {
+		if(cashRegister1.getWaitingTime() < cashRegister2.getWaitingTime()){
+            return cashRegister1;
+        }else{
+            return cashRegister2;
+        }
+	}
+
+	private List<CashRegister> getCashRegistersForRequest(Request request){
+		return this.cashRegisterList.stream()
+							 		.filter(cashRegister -> cashRegister.acceptRequest(request))
+							 		.collect(Collectors.toList());
+	}
+
+	public List<CashRegister> getCashRegisterList() {
+		return cashRegisterList;
+	}
+
+	public void setCashRegisterList(List<CashRegister> cashRegisterList) {
+		this.cashRegisterList = cashRegisterList;
 	}
 }
