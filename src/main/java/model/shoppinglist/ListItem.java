@@ -1,4 +1,4 @@
-package model;
+package model.shoppinglist;
 
 public class ListItem {
 	private Product product;

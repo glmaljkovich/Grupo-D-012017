@@ -1,5 +1,7 @@
-package model;
+package model.cashregister;
 
+import model.shoppinglist.ListItem;
+import model.requests.Request;
 import org.junit.Before;
 import org.junit.Test;
 

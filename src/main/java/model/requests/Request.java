@@ -1,5 +1,7 @@
-package model;
+package model.requests;
 
+import model.shoppinglist.ListItem;
+import model.shoppinglist.ShoppingList;
 import model.user.Client;
 
 import java.util.List;

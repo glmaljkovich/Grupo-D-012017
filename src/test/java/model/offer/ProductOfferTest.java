@@ -1,12 +1,11 @@
 package model.offer;
 
-import model.ListItem;
-import model.Product;
-import model.ShoppingList;
+import model.shoppinglist.ListItem;
+import model.shoppinglist.Product;
+import model.shoppinglist.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;

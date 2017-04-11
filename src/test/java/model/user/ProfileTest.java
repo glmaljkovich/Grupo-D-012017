@@ -1,8 +1,11 @@
 package model.user;
 
-import model.user.Profile;
+import model.Threshold;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -53,4 +56,11 @@ public class ProfileTest {
         assertEquals(lastName, profile.getLastName());
     }
 
+    @Test
+    public void testSetThresholds() throws Exception {
+        List<Threshold> thresholds = new ArrayList<>();
+        profile.setThresholds(thresholds);
+
+        assertEquals(thresholds, profile.getThresholds());
+    }
 }

@@ -1,11 +1,11 @@
-package model;
+package model.shoppinglist;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-
+import model.shoppinglist.ListItem;
+import model.shoppinglist.Product;
 import org.junit.Before;
 import org.junit.Test;
 

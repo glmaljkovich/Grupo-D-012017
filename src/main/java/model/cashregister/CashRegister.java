@@ -1,4 +1,6 @@
-package model;
+package model.cashregister;
+
+import model.requests.Request;
 
 import java.util.LinkedList;
 import java.util.Queue;

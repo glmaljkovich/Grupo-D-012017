@@ -1,4 +1,6 @@
-package model;
+package model.shoppinglist;
+
+import model.Price;
 
 public class Product {
 	private int id;

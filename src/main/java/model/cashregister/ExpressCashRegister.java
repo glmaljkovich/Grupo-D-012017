@@ -1,4 +1,6 @@
-package model;
+package model.cashregister;
+
+import model.requests.Request;
 
 /**
  * Created by gabriel on 11/04/17.

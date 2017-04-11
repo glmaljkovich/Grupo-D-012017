@@ -1,6 +1,6 @@
 package model.offer;
 
-import model.Product;
+import model.shoppinglist.Product;
 import org.junit.Before;
 import org.junit.Test;
 

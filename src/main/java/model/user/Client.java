@@ -1,6 +1,6 @@
 package model.user;
 
-import model.ShoppingList;
+import model.shoppinglist.ShoppingList;
 
 import java.util.List;
 

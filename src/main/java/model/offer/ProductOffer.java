@@ -1,8 +1,8 @@
 package model.offer;
 
-import model.ListItem;
-import model.Product;
-import model.ShoppingList;
+import model.shoppinglist.ListItem;
+import model.shoppinglist.Product;
+import model.shoppinglist.ShoppingList;
 
 import java.time.LocalDate;
 

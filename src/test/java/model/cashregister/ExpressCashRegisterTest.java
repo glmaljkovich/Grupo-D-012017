@@ -1,5 +1,6 @@
-package model;
+package model.cashregister;
 
+import model.requests.Request;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

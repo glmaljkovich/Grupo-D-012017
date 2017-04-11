@@ -1,7 +1,9 @@
-package model;
+package model.shoppinglist;
 
 import static org.junit.Assert.*;
 
+import model.Price;
+import model.shoppinglist.Product;
 import org.junit.Before;
 import org.junit.Test;
 

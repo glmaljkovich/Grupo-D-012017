@@ -6,9 +6,7 @@ import static org.mockito.Mockito.mock;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ShoppingList;
-import model.user.Client;
-import model.user.Profile;
+import model.shoppinglist.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,4 +1,7 @@
-package model;
+package model.requests;
+
+import model.cashregister.CashRegister;
+import model.exceptions.NoCashRegisterAvailableException;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,10 @@
-package model;
+package model.requests;
 
+import model.cashregister.CashRegister;
+import model.cashregister.ExpressCashRegister;
+import model.exceptions.NoCashRegisterAvailableException;
+import model.requests.Request;
+import model.requests.RequestManager;
 import org.junit.Before;
 import org.junit.Test;
 

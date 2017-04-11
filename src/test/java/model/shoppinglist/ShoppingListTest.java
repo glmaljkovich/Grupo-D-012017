@@ -1,5 +1,7 @@
-package model;
+package model.shoppinglist;
 
+import model.shoppinglist.ListItem;
+import model.shoppinglist.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
 

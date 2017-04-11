@@ -1,7 +1,9 @@
-package model;
+package model.requests;
 
 import static org.junit.Assert.*;
 
+import model.requests.Request;
+import model.shoppinglist.ShoppingList;
 import model.user.Client;
 import org.junit.Before;
 import org.junit.Test;
