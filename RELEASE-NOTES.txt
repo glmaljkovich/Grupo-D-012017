@@ -1,0 +1,17 @@
+---------------------------------------------------------------------
+RELEASE 1.0
+---------------------------------------------------------------------
+NEW FEATURES:
+* Google Maps POC
+* Heroku CD
+* Travis-CI Integration
+* Mobile Mockup
+* Codacy Integration
+* Coveralls Coverage Integration
+* CashRegister, Users, Products and Shopping Lists logic implemented
+
+NOTES 
+* The Alert and Treshold system are still unimplemented.
+
+KNOWN ISSUES 
+* Coffee seems to run short the closer we get to the release date.
