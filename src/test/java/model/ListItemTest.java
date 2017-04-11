@@ -35,6 +35,8 @@ public class ListItemTest {
 	
 	@Test
 	public void testQuantityListItem() {
+		listItem = new ListItem(product, 5);
+
 		listItem.setQuantity(quantity);
 		assertEquals(quantity, listItem.getQuantity());
 	}

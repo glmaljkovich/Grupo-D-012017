@@ -1,11 +1,13 @@
 package model.offer;
 
+import model.Product;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by gabriel on 10/04/17.
@@ -39,6 +41,8 @@ public class OfferTest {
 
     @Test
     public void setDiscount() throws Exception {
+
+        offer = new ProductOffer(start, end, 10, mock(Product.class));
         offer.setDiscount(20);
 
         assertEquals(Math.round(20), Math.round(offer.getDiscount()));

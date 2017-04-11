@@ -15,25 +15,58 @@ public class ProductTest {
 		product = new Product();
 		price = new Price(10,20);
 	}
-	
+
 	@Test
-	public void testProduct() {
+	public void testBrand() throws Exception {
 		product.setBrand("yogurisimo");
-		product.setCategory("Lacteos");
-		product.setID("1");
-		product.setImage("URL");
-		product.setName("Yogur");
-		product.setPrice(price);
-		product.setStock(3);
 		assertEquals("yogurisimo", product.getBrand());
+	}
+
+	@Test
+	public void testCategory() throws Exception {
+		product.setCategory("Lacteos");
 		assertEquals("Lacteos", product.getCategory());
-		assertEquals("1", product.getID());
+	}
+
+	@Test
+	public void testId() throws Exception {
+		product.setId(1);
+		assertEquals(1, product.getId());
+	}
+
+	@Test
+	public void testImage() throws Exception {
+		product.setImage("URL");
 		assertEquals("URL", product.getImage());
+	}
+
+	@Test
+	public void testName() throws Exception {
+		product.setName("Yogur");
 		assertEquals("Yogur", product.getName());
+	}
+
+	@Test
+	public void testPrice() throws Exception {
+		product.setPrice(price);
 		assertEquals(price, product.getPrice());
-		assertEquals(10, product.getPrice().getInteger());
-		assertEquals(20, product.getPrice().getDecimal());
+	}
+
+	@Test
+	public void testStock() throws Exception {
+		product.setStock(3);
 		assertEquals(3, product.getStock());
 	}
 
+	@Test
+	public void testTime() throws Exception {
+		product.setTime(3);
+		assertEquals(3, product.getTime());
+	}
+
+	@Test
+	public void testCoverage() throws Exception {
+		product = new Product(1,"coca","cola",1,price,"imagen","gaseosas");
+		assertEquals(price, product.getPrice());
+	}
 }

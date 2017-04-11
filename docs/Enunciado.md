@@ -2,7 +2,7 @@
 
 Se busca la construcción de una aplicación de gestión de compras para usuarios de supermercados.
 
-La aplicación debe permitir listar los productos para la venta para lo cual se debe poder cargar nombre, marca, stock, precio y una imagen. Estos productos pueden ser modificados por el **_ENCARGADO_** del local o puede actualizarse de manera batch por medio de un CSV donde se carga <ID, Nombre, Marca, Stock, Precio, Imagen> . Imagen como una URL a una imagen pública.
+La aplicación debe permitir listar los productos para la venta para lo cual se debe poder cargar nombre, marca, stock, precio y una imagen. Estos productos pueden ser modificados por el **_ENCARGADO_** del local o puede actualizarse de manera batch por medio de un CSV donde se carga <id, Nombre, Marca, Stock, Precio, Imagen> . Imagen como una URL a una imagen pública.
 
 Los compradores podrán crearse usuarios y crear listas de compras. Las listas incluyen nombre del producto y cantidad a comprar.
 

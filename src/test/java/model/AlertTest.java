@@ -23,6 +23,12 @@ public class AlertTest {
     }
 
     @Test
+    public void getDefaultMessage() throws Exception {
+        alert = new Alert();
+        assertEquals("", alert.getMessage());
+    }
+
+    @Test
     public void setEnabled() throws Exception {
         alert.setEnabled(true);
 

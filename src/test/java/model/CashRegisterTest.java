@@ -40,6 +40,11 @@ public class CashRegisterTest {
     }
 
     @Test
+    public void acceptRequest() throws Exception {
+        assertTrue(register.acceptRequest(request));
+    }
+
+    @Test
     public void setWaitingTime() throws Exception {
         int waitingTime = 20;
         register.setWaitingTime(waitingTime);

@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by gabriel on 11/04/17.
  */
-public class RequestManagerTest2 {
+public class RequestManagerTest {
     private CashRegister register;
     private RequestManager manager;
     private Request request;

@@ -19,14 +19,12 @@ public class PriceTest {
 	
 	@Test
 	public void testInteger() {
-		assertEquals(10, price.getInteger());
 		price.setInteger(100);
 		assertEquals(100, price.getInteger());
 	}
 	
 	@Test
 	public void testDecimal() {
-		assertEquals(20, price.getDecimal());
 		price.setDecimal(200);
 		assertEquals(200, price.getDecimal());
 	}	

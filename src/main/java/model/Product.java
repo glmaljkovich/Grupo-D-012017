@@ -1,16 +1,17 @@
 package model;
 
 public class Product {
-	private String ID;
+	private int id;
 	private String name;
 	private String brand;
 	private int stock;
 	private Price price;
 	private String image;
 	private String category;
+	private int time;
 	
-	public Product(String ID,String name,String brand,int stock,Price price,String image,String category){
-		this.ID = ID;
+	public Product(int id, String name, String brand, int stock, Price price, String image, String category){
+		this.id = id;
 		this.name = name;
 		this.brand = brand;
 		this.stock = stock;
@@ -28,12 +29,12 @@ public class Product {
 		//this.image = image;
 	}
 	
-	public String getID() {
-		return ID;
+	public int getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -85,7 +86,10 @@ public class Product {
 	}
 
 	public int getTime(){
-		return 1;
+		return this.time;
 	}
-	
+
+	public void setTime(int time) {
+		this.time = time;
+	}
 }

@@ -25,10 +25,10 @@ public class ExpressCashRegisterTest {
 
     @Test
     public void acceptRequestIsTrueForARequestWithTheExactLimit() throws Exception {
-        register    = new ExpressCashRegister(8);
+        register    = new ExpressCashRegister();
         request     = mock(Request.class);
 
-        when(request.getShoppingListSize()).thenReturn(8);
+        when(request.getShoppingListSize()).thenReturn(10);
 
         assertTrue(register.acceptRequest(request));
     }
