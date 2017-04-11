@@ -50,4 +50,7 @@ public class Request {
 		this.duration = duration;
 	}
 	
+	public int getSizeShoppingList(){
+		return this.shoppingList.getItems().size();
+	}
 }
