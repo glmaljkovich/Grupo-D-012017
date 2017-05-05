@@ -1,6 +1,6 @@
-package model.cashregister;
+package grupod.desapp.unq.edu.ar.model.cashregister;
 
-import model.requests.Request;
+import grupod.desapp.unq.edu.ar.model.requests.Request;
 
 /**
  * Created by gabriel on 11/04/17.
