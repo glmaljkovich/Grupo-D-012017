@@ -1,7 +1,7 @@
-package model.offer;
+package grupod.desapp.unq.edu.ar.model.offer;
 
-import model.shoppinglist.ListItem;
-import model.shoppinglist.ShoppingList;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 
 import java.time.LocalDate;
 

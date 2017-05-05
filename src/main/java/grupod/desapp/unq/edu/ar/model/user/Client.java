@@ -1,6 +1,6 @@
-package model.user;
+package grupod.desapp.unq.edu.ar.model.user;
 
-import model.shoppinglist.ShoppingList;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 
 import java.util.List;
 

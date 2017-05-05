@@ -1,6 +1,6 @@
-package model;
+package grupod.desapp.unq.edu.ar.model;
 
-import model.shoppinglist.ShoppingList;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 
 public interface Threshold {
 	public boolean shouldFireAlert(ShoppingList list);

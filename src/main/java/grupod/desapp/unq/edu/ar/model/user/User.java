@@ -1,7 +1,15 @@
-package model.user;
+package grupod.desapp.unq.edu.ar.model.user;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "users")
 public class User {
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	@NotNull
 	private String username;
 	private String password;
 	private String email;
@@ -9,6 +17,12 @@ public class User {
 	
 	public User(){
 		
+	}
+
+	public User(String username, String password, String email){
+		this.username 	= username;
+		this.password 	= password;
+		this.email 		= email;
 	}
 	
 	public String getEmail() {
@@ -49,7 +63,7 @@ public class User {
 		this.password = password;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

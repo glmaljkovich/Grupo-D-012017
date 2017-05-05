@@ -1,8 +1,8 @@
-package model.requests;
+package grupod.desapp.unq.edu.ar.model.requests;
 
-import model.shoppinglist.ListItem;
-import model.shoppinglist.ShoppingList;
-import model.user.Client;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
+import grupod.desapp.unq.edu.ar.model.user.Client;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package model.shoppinglist;
+package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
 import java.util.ArrayList;
 import java.util.List;

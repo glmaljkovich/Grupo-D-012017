@@ -1,7 +1,7 @@
-package model.requests;
+package grupod.desapp.unq.edu.ar.model.requests;
 
-import model.cashregister.CashRegister;
-import model.exceptions.NoCashRegisterAvailableException;
+import grupod.desapp.unq.edu.ar.model.cashregister.CashRegister;
+import grupod.desapp.unq.edu.ar.model.exceptions.NoCashRegisterAvailableException;
 
 import java.util.List;
 import java.util.Optional;

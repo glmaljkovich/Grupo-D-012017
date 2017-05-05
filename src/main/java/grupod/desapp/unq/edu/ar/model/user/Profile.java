@@ -1,6 +1,6 @@
-package model.user;
+package grupod.desapp.unq.edu.ar.model.user;
 
-import model.Threshold;
+import grupod.desapp.unq.edu.ar.model.Threshold;
 
 import java.util.List;
 

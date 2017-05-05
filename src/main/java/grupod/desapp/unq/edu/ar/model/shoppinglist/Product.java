@@ -1,6 +1,6 @@
-package model.shoppinglist;
+package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
-import model.Price;
+import grupod.desapp.unq.edu.ar.model.Price;
 
 public class Product {
 	private int id;
