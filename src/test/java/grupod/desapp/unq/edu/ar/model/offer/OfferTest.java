@@ -1,12 +1,12 @@
-package model.offer;
+package grupod.desapp.unq.edu.ar.model.offer;
 
-import model.shoppinglist.Product;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 /**

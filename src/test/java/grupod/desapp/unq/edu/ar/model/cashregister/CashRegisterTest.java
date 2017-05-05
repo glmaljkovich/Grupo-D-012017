@@ -1,15 +1,15 @@
-package model.cashregister;
+package grupod.desapp.unq.edu.ar.model.cashregister;
 
-import model.shoppinglist.ListItem;
-import model.requests.Request;
+import grupod.desapp.unq.edu.ar.model.requests.Request;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**

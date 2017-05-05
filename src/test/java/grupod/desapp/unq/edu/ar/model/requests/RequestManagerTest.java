@@ -1,17 +1,15 @@
-package model.requests;
+package grupod.desapp.unq.edu.ar.model.requests;
 
-import model.cashregister.CashRegister;
-import model.cashregister.ExpressCashRegister;
-import model.exceptions.NoCashRegisterAvailableException;
-import model.requests.Request;
-import model.requests.RequestManager;
+import grupod.desapp.unq.edu.ar.model.cashregister.CashRegister;
+import grupod.desapp.unq.edu.ar.model.cashregister.ExpressCashRegister;
+import grupod.desapp.unq.edu.ar.model.exceptions.NoCashRegisterAvailableException;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

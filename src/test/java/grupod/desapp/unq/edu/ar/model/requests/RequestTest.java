@@ -1,12 +1,11 @@
-package model.requests;
+package grupod.desapp.unq.edu.ar.model.requests;
 
-import static org.junit.Assert.*;
-
-import model.requests.Request;
-import model.shoppinglist.ShoppingList;
-import model.user.Client;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
+import grupod.desapp.unq.edu.ar.model.user.Client;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class RequestTest {
 	private Request request;

@@ -1,14 +1,15 @@
-package model.user;
+package grupod.desapp.unq.edu.ar.model.user;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.shoppinglist.ShoppingList;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class ClientTest {
 	private Client client;

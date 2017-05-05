@@ -1,4 +1,4 @@
-package model;
+package grupod.desapp.unq.edu.ar.model;
 
 public class Alert {
 	private boolean enabled;

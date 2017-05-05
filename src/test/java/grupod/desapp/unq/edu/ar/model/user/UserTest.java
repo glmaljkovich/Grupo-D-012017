@@ -1,9 +1,9 @@
-package model.user;
-
-import static org.junit.Assert.*;
+package grupod.desapp.unq.edu.ar.model.user;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class UserTest {
 	private User user;

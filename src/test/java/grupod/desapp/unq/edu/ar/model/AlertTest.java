@@ -1,8 +1,10 @@
-package model;
+package grupod.desapp.unq.edu.ar.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by gabriel on 10/04/17.

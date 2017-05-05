@@ -1,14 +1,12 @@
-package model.shoppinglist;
+package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
-import model.shoppinglist.ListItem;
-import model.shoppinglist.ShoppingList;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by gabriel on 10/04/17.

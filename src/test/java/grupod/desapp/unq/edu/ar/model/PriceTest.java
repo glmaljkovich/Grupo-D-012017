@@ -1,12 +1,9 @@
-package model;
-
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
+package grupod.desapp.unq.edu.ar.model;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PriceTest {
 

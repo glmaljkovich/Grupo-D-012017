@@ -1,13 +1,13 @@
-package model.user;
+package grupod.desapp.unq.edu.ar.model.user;
 
-import model.Threshold;
+import grupod.desapp.unq.edu.ar.model.Threshold;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by gabriel on 10/04/17.

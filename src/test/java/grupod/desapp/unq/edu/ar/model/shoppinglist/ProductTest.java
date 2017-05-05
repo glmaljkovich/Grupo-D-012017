@@ -1,11 +1,10 @@
-package model.shoppinglist;
+package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
-import static org.junit.Assert.*;
-
-import model.Price;
-import model.shoppinglist.Product;
+import grupod.desapp.unq.edu.ar.model.Price;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ProductTest {
 
