@@ -2,7 +2,13 @@ package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
 import grupod.desapp.unq.edu.ar.model.Price;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String brand;

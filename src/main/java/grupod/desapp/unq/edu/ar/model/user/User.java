@@ -1,5 +1,7 @@
 package grupod.desapp.unq.edu.ar.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

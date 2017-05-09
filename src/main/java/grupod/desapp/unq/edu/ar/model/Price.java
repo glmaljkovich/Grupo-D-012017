@@ -1,5 +1,10 @@
 package grupod.desapp.unq.edu.ar.model;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Embeddable
 public class Price {
 	private int integer;
 	private int decimal;
@@ -8,6 +13,8 @@ public class Price {
 		this.integer = integer;
 		this.decimal = decimal;
 	}
+
+	public Price(){}
 
 	public int getInteger() {
 		return integer;
