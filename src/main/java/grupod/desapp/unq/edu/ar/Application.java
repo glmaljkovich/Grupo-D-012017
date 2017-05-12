@@ -2,14 +2,8 @@ package grupod.desapp.unq.edu.ar; /**
  * Created by gabriel on 02/05/17.
  */
 
-import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
-import grupod.desapp.unq.edu.ar.persistence.ProductDAO;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import java.util.stream.IntStream;
 
 @SpringBootApplication
 public class Application {

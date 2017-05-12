@@ -1,8 +1,6 @@
 package grupod.desapp.unq.edu.ar.model;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Embeddable
 public class Price {
