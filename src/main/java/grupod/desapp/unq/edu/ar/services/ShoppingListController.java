@@ -102,23 +102,5 @@ public class ShoppingListController {
         }
         return "The shoppingList id is: " + result;
     }
-   
-    /**
-     * GET /update  --> Update the email and the name for the user in the
-     * database having the passed id.
-     */
-//    @RequestMapping(method = PUT, headers = "content-type=application/json")
-//    @ResponseBody
-//    public String updateShoppingList(@RequestBody ShoppingList updated) {
-//        try {
-//            ShoppingList user = shoppingListDao.findOne(updated.getId());
-//            shoppingListDao.set(updated.getListItem());
-//            shoppingListDao.save(shoppingListDao);
-//        }
-//        catch (Exception ex) {
-//            return "Error updating the shoppingList: " + ex.toString();
-//        }
-//        return "ShoppingList succesfully updated!";
-//    }
-    
+       
 }
