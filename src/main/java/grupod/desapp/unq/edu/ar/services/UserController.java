@@ -23,16 +23,21 @@ public class UserController {
      * Create a new user and save it in the database.
      */
     @RequestMapping(method = POST, headers = "content-type=application/json")
-    public String create(@RequestBody User user) {
-        String userId = "";
-        try {
-            userDao.save(user);
-            userId = String.valueOf(user.getId());
+    public ResponseEntity create(@RequestBody User user) {
+        ResponseEntity response;
+        if(userDao.findByUsername(user.getUsername()) != null){
+            response = ResponseEntity.badRequest().body("Usuario existente.");
+        }else{
+            try {
+                userDao.save(user);
+                response = ResponseEntity.ok(user.getToken());
+            }
+            catch (Exception ex) {
+                response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar su pedido.");
+            }
         }
-        catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
-        }
-        return "User succesfully created with id = " + userId;
+
+        return response;
     }
 
     /**
@@ -78,7 +83,7 @@ public class UserController {
             userToken = result.getToken();
         }
         catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Username or Password.");
         }
         return ResponseEntity.ok(userToken);
     }
