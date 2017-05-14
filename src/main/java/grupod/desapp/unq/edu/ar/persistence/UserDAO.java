@@ -22,5 +22,4 @@ public interface UserDAO extends CrudRepository<User, Long> {
 
     public User findById(long id);
 
-
 }

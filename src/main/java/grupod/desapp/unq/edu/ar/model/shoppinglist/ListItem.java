@@ -1,6 +1,20 @@
 package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
-public class ListItem {
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "listItem")
+public class ListItem implements Serializable{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private Product product;
 	private int quantity;
 	private boolean checked;
@@ -41,6 +55,14 @@ public class ListItem {
 
 	public void setChecked(boolean checked) {
 		this.checked = checked;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

@@ -1,12 +1,14 @@
 package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
+import java.io.Serializable;
+
 import grupod.desapp.unq.edu.ar.model.Price;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;

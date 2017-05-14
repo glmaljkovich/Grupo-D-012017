@@ -69,6 +69,7 @@ public class UserController {
         return "The user id is: " + userId;
     }
 
+    
     /**
      * GET /update  --> Update the email and the name for the user in the
      * database having the passed id.
@@ -89,7 +90,4 @@ public class UserController {
     }
 
     // Private fields
-
-
-
 }
