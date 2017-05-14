@@ -4,14 +4,15 @@ package grupod.desapp.unq.edu.ar.services;
 import grupod.desapp.unq.edu.ar.model.user.User;
 import grupod.desapp.unq.edu.ar.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -19,10 +20,9 @@ public class UserController {
 
 
     /**
-     * GET /create  --> Create a new user and save it in the database.
+     * Create a new user and save it in the database.
      */
     @RequestMapping(method = POST, headers = "content-type=application/json")
-    @ResponseBody
     public String create(@RequestBody User user) {
         String userId = "";
         try {
@@ -36,10 +36,9 @@ public class UserController {
     }
 
     /**
-     * GET /delete  --> Delete the user having the passed id.
+     * Delete the user having the passed id.
      */
     @RequestMapping(method = DELETE, headers = "content-type=application/json")
-    @ResponseBody
     public String delete(long id) {
         try {
             User user = userDao.findById(id);
@@ -56,7 +55,6 @@ public class UserController {
      * email.
      */
     @RequestMapping(value = "/get-by-email", method = GET)
-    @ResponseBody
     public String getByEmail(String email) {
         String userId = "";
         try {
@@ -70,11 +68,26 @@ public class UserController {
     }
 
     /**
-     * GET /update  --> Update the email and the name for the user in the
+     * Return the token for the user.
+     */
+    @RequestMapping(value = "/login", method = POST)
+    public ResponseEntity login(@RequestBody User user) {
+        String userToken = null;
+        try {
+            User result = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+            userToken = result.getToken();
+        }
+        catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        return ResponseEntity.ok(userToken);
+    }
+
+    /**
+     * Update the email and the name for the user in the
      * database having the passed id.
      */
     @RequestMapping(method = PUT, headers = "content-type=application/json")
-    @ResponseBody
     public String updateUser(@RequestBody User updated) {
         try {
             User user = userDao.findOne(updated.getId());
