@@ -1,10 +1,9 @@
 package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
-import java.io.Serializable;
-
 import grupod.desapp.unq.edu.ar.model.Price;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "products")

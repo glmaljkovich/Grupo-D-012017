@@ -1,106 +1,88 @@
 package grupod.desapp.unq.edu.ar.services;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
-
-import java.util.ArrayList;
-import java.util.stream.Collectors;
-
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 import grupod.desapp.unq.edu.ar.model.user.User;
 import grupod.desapp.unq.edu.ar.persistence.ShoppingListDAO;
-
+import grupod.desapp.unq.edu.ar.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import antlr.collections.List;
+import java.util.List;
 
 
-@Controller
+@RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/shoppingList")
 public class ShoppingListController {
 
 	@Autowired
     private ShoppingListDAO shoppingListDao;
 
+    @Autowired
+    private UserDAO userDao;
 
     /**
-     * GET /create  --> Create a new shoppingList and save it in the database.
+     * Create a new shoppingList and save it in the database.
      */
-    @RequestMapping(method = POST, headers = "content-type=application/json")
-    @ResponseBody
-    public String create(@RequestBody ShoppingList shoppingList) {
-        String shoppingListId = "";
+    @PostMapping(value = "/{username}", headers = "content-type=application/json")
+    public ResponseEntity create(@RequestBody ShoppingList shoppingList, @PathVariable String username) {
         try {
+            User user = userDao.findByUsername(username);
+            shoppingList.setUser(user);
             shoppingListDao.save(shoppingList);
-            shoppingListId = String.valueOf(shoppingList.getId());
         }
         catch (Exception ex) {
-            return "Error creating the shoppingList: " + ex.toString();
+            return ResponseEntity.badRequest().body("Error creating the shoppingList");
         }
-        return "ShoppingList succesfully created with id = " + shoppingListId;
+        return ResponseEntity.ok(shoppingList.getId());
     }
 
     /**
-     * GET /delete  --> Delete the shoppingList having the passed id.
+     * Delete the shoppingList having the passed id.
      */
-    @RequestMapping(method = DELETE, headers = "content-type=application/json")
-    @ResponseBody
-    public String delete(int id) {
+    @DeleteMapping( headers = "content-type=application/json")
+    public ResponseEntity delete(int id) {
         try {
             ShoppingList shoppingList = shoppingListDao.findById(id);
             shoppingListDao.delete(shoppingList);
         }
         catch (Exception ex) {
-            return "Error deleting the shoppingList: it doesn't exist";
+            return ResponseEntity.badRequest().body("Error deleting the shoppingList: it doesn't exist");
         }
-        return "ShoppingList succesfully deleted!";
+        return ResponseEntity.ok("ShoppingList succesfully deleted!");
     }
     
     /**
-     * GET /get-by-email  --> Return the id for the user having the passed
-     * email.
+     * Return a shoppinglist
      */
-    @RequestMapping(value = "/get-shoppingList", method = GET)
-    @ResponseBody
-    public String getById(int id) {
-        String shopListId = "";
+    @GetMapping
+    public ResponseEntity getById(@RequestParam int id) {
+        ShoppingList shopList;
         try {
-            ShoppingList shopList = shoppingListDao.findById(id);
-            shopListId = String.valueOf(shopList.getId());
+            shopList = shoppingListDao.findById(id);
         }
         catch (Exception ex) {
-            return "ShoppingList not found";
+            return ResponseEntity.badRequest().body("ShoppingList not found");
         }
-        return "The shoppingList id is: " + shopListId;
+        return ResponseEntity.ok(shopList);
     }
     
     /**
-     * GET /  --> Return the id for the user having the passed
-     * email.
+     * Return all the shoppinglists of a user
      */
-    @RequestMapping(value = "/get-all-shoppingList", method = GET)
-    @ResponseBody
-    public String getAllShoppingList() {
-    	ArrayList<String> list = new ArrayList<String>();
-    	String result = "";
+    @GetMapping(value = "/{username}")
+    public ResponseEntity getAllShoppingList(@PathVariable String username) {
+    	List<ShoppingList> list;
+    	User user;
         try {
-            Iterable<ShoppingList> shopList = shoppingListDao.findAll();
-            shopList.forEach(each -> list.add(String.valueOf(each.getId())));
-            result = list
-                    .stream()
-                    .map(s -> s.substring(0, 1))
-                    .collect(Collectors.joining());
+            user = userDao.findByUsername(username);
+            list = shoppingListDao.findByUser(user);
         }
         catch (Exception ex) {
-            return "ShoppingList not found";
+            return ResponseEntity.badRequest().body("ShoppingList not found");
         }
-        return "The shoppingList id is: " + result;
+        return ResponseEntity.ok(list);
     }
        
 }

@@ -1,9 +1,10 @@
 package grupod.desapp.unq.edu.ar.model;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class Price {
+public class Price implements Serializable{
 	private int integer;
 	private int decimal;
 	

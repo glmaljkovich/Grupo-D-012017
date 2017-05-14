@@ -6,7 +6,6 @@ import grupod.desapp.unq.edu.ar.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -22,7 +21,7 @@ public class UserController {
     /**
      * Create a new user and save it in the database.
      */
-    @RequestMapping(method = POST, headers = "content-type=application/json")
+    @PostMapping(headers = "content-type=application/json")
     public ResponseEntity create(@RequestBody User user) {
         ResponseEntity response;
         if(userDao.findByUsername(user.getUsername()) != null){
@@ -43,7 +42,7 @@ public class UserController {
     /**
      * Delete the user having the passed id.
      */
-    @RequestMapping(method = DELETE, headers = "content-type=application/json")
+    @DeleteMapping(headers = "content-type=application/json")
     public String delete(long id) {
         try {
             User user = userDao.findById(id);
@@ -56,10 +55,10 @@ public class UserController {
     }
 
     /**
-     * GET /get-by-email  --> Return the id for the user having the passed
+     * Return the id for the user having the passed
      * email.
      */
-    @RequestMapping(value = "/get-by-email", method = GET)
+    @GetMapping(value = "/get-by-email")
     public String getByEmail(String email) {
         String userId = "";
         try {
@@ -76,7 +75,7 @@ public class UserController {
     /**
      * Return the token for the user.
      */
-    @RequestMapping(value = "/login", method = POST)
+    @PostMapping(value = "/login")
     public ResponseEntity login(@RequestBody User user) {
         String userToken = null;
         try {

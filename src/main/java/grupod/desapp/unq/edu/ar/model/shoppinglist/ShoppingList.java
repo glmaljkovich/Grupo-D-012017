@@ -1,16 +1,13 @@
 package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
+
+import grupod.desapp.unq.edu.ar.model.user.User;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "shoppingLists")
@@ -18,12 +15,17 @@ public class ShoppingList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	private String name;
+	@JsonProperty(access = WRITE_ONLY)
+	private User user;
+
 	@Column
 	@ElementCollection(targetClass=ListItem.class)
 	private List<ListItem> list;
 	
-	public ShoppingList(int id, List<ListItem> listItem){
-		this.id = id;
+	public ShoppingList(String name, User user, List<ListItem> listItem){
+		this.name = name;
+		this.user = user;
 		this.list = listItem;
 	}
 
@@ -47,4 +49,27 @@ public class ShoppingList {
 		return list;
 	}
 
+	public void addItem(ListItem item){
+		list.add(item);
+	}
+
+	public void removeItem(ListItem item){
+		list.remove(item);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
