@@ -1,5 +1,8 @@
 package grupod.desapp.unq.edu.ar.model.user;
 
+import org.springframework.util.DigestUtils;
+import sun.security.provider.MD5;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -69,6 +72,12 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getToken(){
+		String hash = this.username + this.password;
+
+		return DigestUtils.md5DigestAsHex(hash.getBytes());
 	}
 
 }

@@ -38,6 +38,13 @@ public class UserTest {
 		user.setId(1);
 		assertEquals(1, user.getId());
 	}
+
+	@Test
+	public void testToken() {
+		String token = "24d794dfc756320ffadb905d526299bc";
+
+		assertEquals(token, user.getToken());
+	}
 	
 	@Test
 	public void testGetAccessLevel() {
