@@ -3,6 +3,7 @@ package grupod.desapp.unq.edu.ar.model.shoppinglist;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 
+import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.user.User;
 
 import javax.persistence.*;
@@ -49,8 +50,16 @@ public class ShoppingList {
 		return list;
 	}
 
-	public void addItem(ListItem item){
-		list.add(item);
+	public void addItem(ListItem item) throws ItemAlreadyExistsException {
+		if(this.hasItem(item)){
+			throw new ItemAlreadyExistsException();
+		}else{
+			list.add(item);
+		}
+	}
+
+	public boolean hasItem(ListItem item){
+		return list.stream().anyMatch(element -> element.getProduct().equals(item.getProduct()));
 	}
 
 	public void removeItem(ListItem item){

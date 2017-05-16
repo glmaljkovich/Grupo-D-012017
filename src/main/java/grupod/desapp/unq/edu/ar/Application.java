@@ -3,6 +3,7 @@ package grupod.desapp.unq.edu.ar; /**
  */
 
 import grupod.desapp.unq.edu.ar.model.Price;
+import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
@@ -46,7 +47,11 @@ public class Application {
                 productDAO.save(product);
                 ListItem item = new ListItem(product, i);
                 listItemDAO.save(item);
-                list.addItem(item);
+                try {
+                    list.addItem(item);
+                } catch (ItemAlreadyExistsException e) {
+                    e.printStackTrace();
+                }
             });
 
             shoppingListDAO.save(list);

@@ -1,7 +1,11 @@
 package grupod.desapp.unq.edu.ar.services;
 
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 import grupod.desapp.unq.edu.ar.model.user.User;
+import grupod.desapp.unq.edu.ar.persistence.ListItemDAO;
+import grupod.desapp.unq.edu.ar.persistence.ProductDAO;
 import grupod.desapp.unq.edu.ar.persistence.ShoppingListDAO;
 import grupod.desapp.unq.edu.ar.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,12 @@ public class ShoppingListController {
     private ShoppingListDAO shoppingListDao;
 
     @Autowired
+    private ProductDAO productDAO;
+
+    @Autowired
+    private ListItemDAO listItemDAO;
+
+    @Autowired
     private UserDAO userDao;
 
     /**
@@ -36,6 +46,25 @@ public class ShoppingListController {
             return ResponseEntity.badRequest().body("Error creating the shoppingList");
         }
         return ResponseEntity.ok(shoppingList.getId());
+    }
+
+    /**
+     * Create a new shoppingList and save it in the database.
+     */
+    @PostMapping(value = "/add-item/{id}", headers = "content-type=application/json")
+    public ResponseEntity addItem(@RequestBody ListItem item, @PathVariable Integer id) {
+        try {
+            ShoppingList list = shoppingListDao.findById(id);
+            Product product = productDAO.findById(item.getProduct().getId());
+            item.setProduct(product);
+            listItemDAO.save(item);
+            list.addItem(item);
+            shoppingListDao.save(list);
+        }
+        catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+        return ResponseEntity.ok("Item added");
     }
 
     /**
