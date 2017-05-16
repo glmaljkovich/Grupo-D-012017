@@ -1,13 +1,27 @@
 package grupod.desapp.unq.edu.ar.model.cashregister;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import grupod.desapp.unq.edu.ar.model.requests.Request;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
-public class CashRegister {
-	private Queue<Request> requests;
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
+
+@Entity
+@Table(name = "registers")
+public class CashRegister implements Serializable{
+	@JsonProperty(access = WRITE_ONLY)
+	@Column
+	@ElementCollection(targetClass=Request.class)
+	private List<Request> requests;
 	private int waitingTime;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	public CashRegister() {
@@ -20,7 +34,7 @@ public class CashRegister {
 	}
 
 	public void processNextRequest(){
-		Request nextRequest = requests.poll();
+		Request nextRequest = ((LinkedList<Request>) requests).poll();
 		nextRequest.getList().forEach(product -> this.decreaseWaitingTime(product.getTime()));
 	}
 	

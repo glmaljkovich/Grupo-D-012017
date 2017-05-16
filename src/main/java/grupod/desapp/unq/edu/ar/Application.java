@@ -3,15 +3,13 @@ package grupod.desapp.unq.edu.ar; /**
  */
 
 import grupod.desapp.unq.edu.ar.model.Price;
+import grupod.desapp.unq.edu.ar.model.cashregister.CashRegister;
 import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 import grupod.desapp.unq.edu.ar.model.user.User;
-import grupod.desapp.unq.edu.ar.persistence.ListItemDAO;
-import grupod.desapp.unq.edu.ar.persistence.ProductDAO;
-import grupod.desapp.unq.edu.ar.persistence.ShoppingListDAO;
-import grupod.desapp.unq.edu.ar.persistence.UserDAO;
+import grupod.desapp.unq.edu.ar.persistence.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +25,7 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner demo(ProductDAO productDAO, UserDAO userDAO, ShoppingListDAO shoppingListDAO, ListItemDAO listItemDAO) {
+    public CommandLineRunner demo(ProductDAO productDAO, UserDAO userDAO, ShoppingListDAO shoppingListDAO, ListItemDAO listItemDAO, CashRegisterDAO cashRegisterDAO) {
         return (args) -> {
             /*Create User*/
             User user = new User("pepe", "1234", "pepe@gmail");
@@ -52,6 +50,13 @@ public class Application {
                 } catch (ItemAlreadyExistsException e) {
                     e.printStackTrace();
                 }
+            });
+
+            /*Create Cash Registers*/
+            IntStream.range(1, 5).forEach(i -> {
+                CashRegister register = new CashRegister();
+                register.setWaitingTime(i*100);
+                cashRegisterDAO.save(register);
             });
 
             shoppingListDAO.save(list);

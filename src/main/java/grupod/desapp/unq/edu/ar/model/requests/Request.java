@@ -3,11 +3,19 @@ package grupod.desapp.unq.edu.ar.model.requests;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 import grupod.desapp.unq.edu.ar.model.user.Client;
+import grupod.desapp.unq.edu.ar.model.user.User;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
-public class Request {
-	private Client client;
+@Entity
+@Table(name = "requests")
+public class Request implements Serializable{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private  int id;
+	private User client;
 	private ShoppingList shoppingList;
 	private int duration;
 	
@@ -20,16 +28,24 @@ public class Request {
 		this.shoppingList = shoppingList;
 		this.setDuration();
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private void setDuration(){
 		this.getList().forEach(product -> duration += product.getTime());
 	}
 
-	public Client getClient() {
+	public User getClient() {
 		return client;
 	}
 	
-	public void setClient(Client client) {
+	public void setClient(User client) {
 		this.client = client;
 	}
 	
