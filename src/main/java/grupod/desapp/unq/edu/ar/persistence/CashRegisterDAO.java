@@ -1,7 +1,6 @@
 package grupod.desapp.unq.edu.ar.persistence;
 
 import grupod.desapp.unq.edu.ar.model.cashregister.CashRegister;
-import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

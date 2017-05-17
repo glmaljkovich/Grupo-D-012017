@@ -57,7 +57,14 @@ public class ProductController {
             ObjectMapper mapper = new ObjectMapper();
             Product[] readValue = mapper.readValue(input, Product[].class);
             List<Product> products = Arrays.asList(readValue);
-            productDAO.save(products);
+            products.forEach(product -> {
+                Product existing = productDAO.findByNameAndBrand(product.getName(), product.getBrand());
+                if(existing != null){
+                    product.setId(existing.getId());
+                }
+                productDAO.save(product);
+            });
+
 
         } catch (IOException e) {
             e.printStackTrace();

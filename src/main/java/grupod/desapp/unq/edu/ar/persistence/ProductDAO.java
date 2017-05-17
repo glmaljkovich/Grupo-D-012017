@@ -15,5 +15,6 @@ import java.util.List;
 public interface ProductDAO extends PagingAndSortingRepository<Product, Integer> {
     public Product findById(int id);
     public List<Product> findByCategory(String category);
+    public Product findByNameAndBrand(String name, String brand);
     public Page<Product> findProductsByNameContainingOrBrandContainingAllIgnoreCase(String name, String brand, Pageable page);
 }

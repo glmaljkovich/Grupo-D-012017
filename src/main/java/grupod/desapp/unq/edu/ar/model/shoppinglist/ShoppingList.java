@@ -1,8 +1,6 @@
 package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
-
 import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.user.User;
 
@@ -10,6 +8,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 
 @Entity
 @Table(name = "shoppingLists")
@@ -60,7 +60,7 @@ public class ShoppingList implements Serializable{
 	}
 
 	public boolean hasItem(ListItem item){
-		return list.stream().anyMatch(element -> element.getProduct().equals(item.getProduct()));
+		return list.stream().anyMatch(element -> element.getProduct().getId() == item.getProduct().getId());
 	}
 
 	public void removeItem(ListItem item){

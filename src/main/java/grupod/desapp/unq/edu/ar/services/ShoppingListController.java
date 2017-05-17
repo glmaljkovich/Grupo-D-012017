@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -40,12 +41,32 @@ public class ShoppingListController {
         try {
             User user = userDao.findByUsername(username);
             shoppingList.setUser(user);
-            shoppingListDao.save(shoppingList);
+            ShoppingList shoppingList1 = shoppingListDao.findById(shoppingList.getId());
+            shoppingListDao.save(shoppingList1);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("Error creating the shoppingList");
         }
         return ResponseEntity.ok(shoppingList.getId());
+    }
+
+    @PostMapping(value = "/update", headers = "content-type=application/json")
+    public ResponseEntity update(@RequestBody ShoppingList shoppingList) {
+        try {
+            ShoppingList laPosta = shoppingListDao.findById(shoppingList.getId());
+            List<ListItem> items = shoppingList.getItems().stream().map(item -> {
+                ListItem original = listItemDAO.getById(item.getId());
+                original.setQuantity(item.getQuantity());
+                return original;
+            }).collect(Collectors.toList());
+
+            laPosta.setItems(items);
+            shoppingListDao.save(laPosta);
+        }
+        catch (Exception ex) {
+            return ResponseEntity.badRequest().body("Error creating the shoppingList");
+        }
+        return ResponseEntity.ok("Cambios guardados");
     }
 
     /**

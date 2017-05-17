@@ -4,7 +4,6 @@ import grupod.desapp.unq.edu.ar.model.cashregister.CashRegister;
 import grupod.desapp.unq.edu.ar.model.exceptions.NoCashRegisterAvailableException;
 import grupod.desapp.unq.edu.ar.model.requests.Request;
 import grupod.desapp.unq.edu.ar.model.requests.RequestManager;
-import grupod.desapp.unq.edu.ar.model.user.Client;
 import grupod.desapp.unq.edu.ar.model.user.User;
 import grupod.desapp.unq.edu.ar.persistence.CashRegisterDAO;
 import grupod.desapp.unq.edu.ar.persistence.UserDAO;

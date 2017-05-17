@@ -1,6 +1,5 @@
 package grupod.desapp.unq.edu.ar.persistence;
 
-import grupod.desapp.unq.edu.ar.model.cashregister.CashRegister;
 import grupod.desapp.unq.edu.ar.model.requests.Request;
 import org.springframework.data.repository.CrudRepository;
 
