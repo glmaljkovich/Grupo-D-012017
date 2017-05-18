@@ -41,8 +41,7 @@ public class ShoppingListController {
         try {
             User user = userDao.findByUsername(username);
             shoppingList.setUser(user);
-            ShoppingList shoppingList1 = shoppingListDao.findById(shoppingList.getId());
-            shoppingListDao.save(shoppingList1);
+            shoppingListDao.save(shoppingList);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("Error creating the shoppingList");
