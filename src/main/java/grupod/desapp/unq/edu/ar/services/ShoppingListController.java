@@ -64,7 +64,7 @@ public class ShoppingListController {
             shoppingListDao.save(laPosta);
         }
         catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error creating the shoppingList");
+            return ResponseEntity.badRequest().body(ex.getMessage());
         }
         return ResponseEntity.ok("Cambios guardados");
     }
