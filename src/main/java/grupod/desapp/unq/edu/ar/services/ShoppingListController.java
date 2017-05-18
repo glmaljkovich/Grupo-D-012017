@@ -38,15 +38,16 @@ public class ShoppingListController {
      */
     @PostMapping(value = "/{username}", headers = "content-type=application/json")
     public ResponseEntity create(@RequestBody ShoppingList shoppingList, @PathVariable String username) {
+        ShoppingList result;
         try {
             User user = userDao.findByUsername(username);
             shoppingList.setUser(user);
-            shoppingListDao.save(shoppingList);
+             result = shoppingListDao.save(shoppingList);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("Error creating the shoppingList");
         }
-        return ResponseEntity.ok(shoppingList.getId());
+        return ResponseEntity.ok(result.getId());
     }
 
     @PostMapping(value = "/update", headers = "content-type=application/json")
