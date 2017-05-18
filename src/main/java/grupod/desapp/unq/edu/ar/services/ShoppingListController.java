@@ -57,6 +57,7 @@ public class ShoppingListController {
             List<ListItem> items = shoppingList.getItems().stream().map(item -> {
                 ListItem original = listItemDAO.getById(item.getId());
                 original.setQuantity(item.getQuantity());
+                listItemDAO.save(original);
                 return original;
             }).collect(Collectors.toList());
 
@@ -64,7 +65,7 @@ public class ShoppingListController {
             shoppingListDao.save(laPosta);
         }
         catch (Exception ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body("Error creating the shoppingList");
         }
         return ResponseEntity.ok("Cambios guardados");
     }
