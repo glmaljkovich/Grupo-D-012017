@@ -1,4 +1,25 @@
 ---------------------------------------------------------------------
+RELEASE 2.0
+---------------------------------------------------------------------
+NEW FEATURES:
+* Batch upload products through JSON file
+* Heroku Front-end conected with Heroku Backend
+* Search Products
+* Create Shopping List
+* Add ListItem to Shopping List
+* Error and Success Alerts on User Interface
+* Persistent login
+* User registration
+
+NOTES
+* The Alert and Treshold system are still unimplemented.
+* No internationalization yet.
+* List Items and Shopping Lists cant be deleted yet.
+
+KNOWN ISSUES
+* The user doesn't get redirected on logout.
+
+---------------------------------------------------------------------
 RELEASE 1.0
 ---------------------------------------------------------------------
 NEW FEATURES:
@@ -10,8 +31,8 @@ NEW FEATURES:
 * Coveralls Coverage Integration
 * CashRegister, Users, Products and Shopping Lists logic implemented
 
-NOTES 
+NOTES
 * The Alert and Treshold system are still unimplemented.
 
-KNOWN ISSUES 
+KNOWN ISSUES
 * Coffee seems to run short the closer we get to the release date.
