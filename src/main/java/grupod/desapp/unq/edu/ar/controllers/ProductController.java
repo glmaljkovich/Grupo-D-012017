@@ -1,11 +1,13 @@
-package grupod.desapp.unq.edu.ar.services;
+package grupod.desapp.unq.edu.ar.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.persistence.ProductDAO;
+import grupod.desapp.unq.edu.ar.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,28 +23,28 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/product")
 public class ProductController {
-    @Autowired
-    private ProductDAO productDAO;
 
+    @Autowired
+    private ProductService productService;
 
     @PostMapping(headers = "content-type=application/json")
-    public String create(@RequestBody Product product) {
-        String productName = "";
+    public ResponseEntity create(@RequestBody Product product) {
+        Integer id;
         try {
-            productDAO.save(product);
-            productName = String.valueOf(product.getName());
+            id = productService.addProduct(product);
         }
         catch (Exception ex) {
-            return "Error creating the product: " + ex.toString();
+            ex.printStackTrace();
+            return ResponseEntity.badRequest().body("Error creating the product");
         }
-        return "User succesfully created with id = " + productName;
+        return ResponseEntity.ok(id);
     }
 
     @GetMapping
     public List<Product> find(@RequestParam("criteria") String criteria, Pageable pageable) {
         Page<Product> page;
         try {
-             page = productDAO.findProductsByNameContainingOrBrandContainingAllIgnoreCase(criteria, criteria,pageable);
+             page = productService.find(criteria, pageable);
         }
         catch (Exception ex) {
             return new ArrayList<>();
@@ -51,24 +53,12 @@ public class ProductController {
     }
 
     @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
         try {
-            String input = new String(file.getBytes());
-            ObjectMapper mapper = new ObjectMapper();
-            Product[] readValue = mapper.readValue(input, Product[].class);
-            List<Product> products = Arrays.asList(readValue);
-            products.forEach(product -> {
-                Product existing = productDAO.findByNameAndBrand(product.getName(), product.getBrand());
-                if(existing != null){
-                    product.setId(existing.getId());
-                }
-                productDAO.save(product);
-            });
-
-
+            productService.uploadProducts(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "redirect:/";
+        return ResponseEntity.ok("Archivos subidos correctamente");
     }
 }

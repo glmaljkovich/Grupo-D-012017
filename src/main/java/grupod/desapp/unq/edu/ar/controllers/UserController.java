@@ -1,8 +1,9 @@
-package grupod.desapp.unq.edu.ar.services;
+package grupod.desapp.unq.edu.ar.controllers;
 
 
+import grupod.desapp.unq.edu.ar.model.exceptions.UserAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.user.User;
-import grupod.desapp.unq.edu.ar.persistence.UserDAO;
+import grupod.desapp.unq.edu.ar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 @CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserDAO userDao;
 
+    @Autowired
+    private UserService userService;
 
     /**
      * Create a new user and save it in the database.
@@ -24,18 +25,17 @@ public class UserController {
     @PostMapping(headers = "content-type=application/json")
     public ResponseEntity create(@RequestBody User user) {
         ResponseEntity response;
-        if(userDao.findByUsername(user.getUsername()) != null){
-            response = ResponseEntity.badRequest().body("Usuario existente.");
-        }else{
-            try {
-                userDao.save(user);
-                response = ResponseEntity.ok(user.getToken());
-            }
-            catch (Exception ex) {
-                response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar su pedido.");
-            }
+        try {
+            userService.add(user);
+            response = ResponseEntity.ok(user.getToken());
         }
-
+        catch (UserAlreadyExistsException ex){
+            ex.printStackTrace();
+            response = ResponseEntity.badRequest().body("Usuario existente.");
+        }
+        catch (Exception ex) {
+            response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar su pedido.");
+        }
         return response;
     }
 
@@ -43,32 +43,30 @@ public class UserController {
      * Delete the user having the passed id.
      */
     @DeleteMapping(headers = "content-type=application/json")
-    public String delete(long id) {
+    public ResponseEntity delete(long id) {
         try {
-            User user = userDao.findById(id);
-            userDao.delete(user);
+           userService.delete(id);
         }
         catch (Exception ex) {
-            return "Error deleting the user: it doesn't exist";
+            return ResponseEntity.badRequest().body("Error deleting the user: it doesn't exist");
         }
-        return "User succesfully deleted!";
+        return ResponseEntity.ok("User succesfully deleted!");
     }
 
     /**
-     * Return the id for the user having the passed
+     * Return the token for the user having the passed
      * email.
      */
     @GetMapping(value = "/get-by-email")
-    public String getByEmail(String email) {
-        String userId = "";
+    public ResponseEntity getByEmail(String email) {
+        String token;
         try {
-            User user = userDao.findByEmail(email);
-            userId = String.valueOf(user.getId());
+            token = userService.findByEmail(email);
         }
         catch (Exception ex) {
-            return "User not found";
+            return ResponseEntity.badRequest().body("User not found");
         }
-        return "The user id is: " + userId;
+        return ResponseEntity.ok(token);
     }
 
     
@@ -79,8 +77,7 @@ public class UserController {
     public ResponseEntity login(@RequestBody User user) {
         String userToken = null;
         try {
-            User result = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-            userToken = result.getToken();
+            userToken = userService.login(user);
         }
         catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Username or Password.");
@@ -93,18 +90,15 @@ public class UserController {
      * database having the passed id.
      */
     @RequestMapping(method = PUT, headers = "content-type=application/json")
-    public String updateUser(@RequestBody User updated) {
+    public ResponseEntity updateUser(@RequestBody User updated) {
         try {
-            User user = userDao.findOne(updated.getId());
-            user.setEmail(updated.getEmail());
-            user.setUsername(updated.getUsername());
-            userDao.save(user);
+            userService.update(updated);
         }
         catch (Exception ex) {
-            return "Error updating the user: " + ex.toString();
+            ex.printStackTrace();
+            return ResponseEntity.badRequest().body("Error updating the user");
         }
-        return "User succesfully updated!";
+        return ResponseEntity.ok("User succesfully updated!");
     }
 
-    // Private fields
 }

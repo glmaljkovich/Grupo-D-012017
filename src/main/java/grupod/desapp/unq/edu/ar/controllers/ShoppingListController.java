@@ -1,5 +1,6 @@
-package grupod.desapp.unq.edu.ar.services;
+package grupod.desapp.unq.edu.ar.controllers;
 
+import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
@@ -8,6 +9,7 @@ import grupod.desapp.unq.edu.ar.persistence.ListItemDAO;
 import grupod.desapp.unq.edu.ar.persistence.ProductDAO;
 import grupod.desapp.unq.edu.ar.persistence.ShoppingListDAO;
 import grupod.desapp.unq.edu.ar.persistence.UserDAO;
+import grupod.desapp.unq.edu.ar.services.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,16 +24,7 @@ import java.util.stream.Collectors;
 public class ShoppingListController {
 
 	@Autowired
-    private ShoppingListDAO shoppingListDao;
-
-    @Autowired
-    private ProductDAO productDAO;
-
-    @Autowired
-    private ListItemDAO listItemDAO;
-
-    @Autowired
-    private UserDAO userDao;
+    private ShoppingListService shoppingListService;
 
     /**
      * Create a new shoppingList and save it in the database.
@@ -40,11 +33,9 @@ public class ShoppingListController {
     public ResponseEntity create(@RequestBody ShoppingList shoppingList, @PathVariable String username) {
         ShoppingList result;
         try {
-            User user = userDao.findByUsername(username);
-            shoppingList.setUser(user);
-             result = shoppingListDao.save(shoppingList);
+            result = shoppingListService.create(shoppingList, username);
         }
-        catch (Exception ex) {
+        catch (NullPointerException ex) {
             return ResponseEntity.badRequest().body("Error creating the shoppingList");
         }
         return ResponseEntity.ok(result.getId());
@@ -53,19 +44,7 @@ public class ShoppingListController {
     @PostMapping(value = "/update", headers = "content-type=application/json")
     public ResponseEntity update(@RequestBody ShoppingList shoppingList) {
         try {
-            ShoppingList laPosta = shoppingListDao.findById(shoppingList.getId());
-            List<ListItem> items = shoppingList.getItems().stream().map(item -> {
-                if(listItemDAO.getById(item.getId()) != null){
-                    ListItem original = listItemDAO.getById(item.getId());
-                    original.setQuantity(item.getQuantity());
-                    listItemDAO.save(original);
-                    return original;
-                }
-                return listItemDAO.save(item);
-            }).collect(Collectors.toList());
-
-            laPosta.setItems(items);
-            shoppingListDao.save(laPosta);
+            shoppingListService.update(shoppingList);
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -75,20 +54,15 @@ public class ShoppingListController {
     }
 
     /**
-     * Create a new shoppingList and save it in the database.
+     * Add an item if it isn't already in the list
      */
     @PostMapping(value = "/add-item/{id}", headers = "content-type=application/json")
     public ResponseEntity addItem(@RequestBody ListItem item, @PathVariable Integer id) {
         try {
-            ShoppingList list = shoppingListDao.findById(id);
-            Product product = productDAO.findById(item.getProduct().getId());
-            item.setProduct(product);
-            listItemDAO.save(item);
-            list.addItem(item);
-            shoppingListDao.save(list);
+            shoppingListService.addItem(id, item);
         }
-        catch (Exception ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+        catch (ItemAlreadyExistsException ex) {
+            return ResponseEntity.badRequest().body("Item already exists. Try changing the quantity instead");
         }
         return ResponseEntity.ok("Item added");
     }
@@ -99,8 +73,7 @@ public class ShoppingListController {
     @DeleteMapping( headers = "content-type=application/json")
     public ResponseEntity delete(int id) {
         try {
-            ShoppingList shoppingList = shoppingListDao.findById(id);
-            shoppingListDao.delete(shoppingList);
+            shoppingListService.delete(id);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("Error deleting the shoppingList: it doesn't exist");
@@ -115,7 +88,7 @@ public class ShoppingListController {
     public ResponseEntity getById(@RequestParam int id) {
         ShoppingList shopList;
         try {
-            shopList = shoppingListDao.findById(id);
+            shopList = shoppingListService.findById(id);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("ShoppingList not found");
@@ -129,10 +102,8 @@ public class ShoppingListController {
     @GetMapping(value = "/{username}")
     public ResponseEntity getAllShoppingList(@PathVariable String username) {
     	List<ShoppingList> list;
-    	User user;
         try {
-            user = userDao.findByUsername(username);
-            list = shoppingListDao.findByUser(user);
+            list = shoppingListService.getShoppingListsForUser(username);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("ShoppingList not found");

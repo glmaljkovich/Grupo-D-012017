@@ -1,4 +1,4 @@
-package grupod.desapp.unq.edu.ar.services;
+package grupod.desapp.unq.edu.ar.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
