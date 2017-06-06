@@ -1,0 +1,53 @@
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">logs</Property>
+        <Property name="format">[%-5level] %d{DEFAULT} [%t] %c{1} - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console-Appender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>
+                    ${format}
+                </pattern>>
+            </PatternLayout>
+        </Console>
+        <File name="App-File-Appender" fileName="${log-path}/app.log" >
+            <PatternLayout>
+                <pattern>
+                    ${format}
+                </pattern>
+            </PatternLayout>
+        </File>
+        <File name="SpringBoot-File-Appender" fileName="${log-path}/springboot.log" >
+            <PatternLayout>
+                <pattern>
+                    ${format}
+                </pattern>
+            </PatternLayout>
+        </File>
+        <RollingFile name="Services-File-Appender"
+                     fileName="${log-path}/services.log"
+                     filePattern="${log-path}/archived/services.log.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout pattern="${format}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="30 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.springframework.web" level="info" additivity="false">
+            <AppenderRef ref="SpringBoot-File-Appender"/>
+            <AppenderRef ref="Console-Appender"/>
+        </Logger>
+        <Logger name="grupod.desapp.unq.edu.ar.controllers" level="info" additivity="false">
+            <AppenderRef ref="Services-File-Appender"/>
+            <AppenderRef ref="Console-Appender"/>
+        </Logger>
+        <Root>
+            <AppenderRef ref="Console-Appender"/>
+            <AppenderRef ref="App-File-Appender"/>
+        </Root>
+    </Loggers>
+</Configuration>

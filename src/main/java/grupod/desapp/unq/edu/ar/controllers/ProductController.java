@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/product")
-public class ProductController {
+public class ProductController extends LoggingController{
 
     @Autowired
     private ProductService productService;
@@ -32,9 +32,10 @@ public class ProductController {
         Integer id;
         try {
             id = productService.addProduct(product);
+            logger.info("Product added: {}", product);
         }
         catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error(ex.getMessage());
             return ResponseEntity.badRequest().body("Error creating the product");
         }
         return ResponseEntity.ok(id);
@@ -57,6 +58,7 @@ public class ProductController {
         try {
             productService.uploadProducts(file);
         } catch (IOException e) {
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
         return ResponseEntity.ok("Archivos subidos correctamente");

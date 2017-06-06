@@ -1,4 +1,4 @@
-package grupod.desapp.unq.edu.ar.services;
+package grupod.desapp.unq.edu.ar.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

@@ -30,12 +30,6 @@ public class ClientTest {
 	}
 	
 	@Test
-	public void testShoppingList() {
-		client.setShoppingLists(lists);
-		assertEquals(lists, client.getShoppingLists());
-	}
-	
-	@Test
 	public void testAddress() {
 		client.setProfile(profile);
 		assertEquals(profile, client.getProfile());

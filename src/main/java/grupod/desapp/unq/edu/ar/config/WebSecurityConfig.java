@@ -1,4 +1,4 @@
-package grupod.desapp.unq.edu.ar.services;
+package grupod.desapp.unq.edu.ar.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

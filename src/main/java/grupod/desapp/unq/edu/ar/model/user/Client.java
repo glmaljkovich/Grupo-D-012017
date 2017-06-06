@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Client extends User {
 	private boolean firstTime;
-	private List<ShoppingList> shoppingLists;
 	private Profile profile;
 	
 	public Client(){
@@ -26,16 +25,6 @@ public class Client extends User {
 
 	public void setFirstTime(boolean firstTime) {
 		this.firstTime = firstTime;
-	}
-
-
-	public List<ShoppingList> getShoppingLists() {
-		return shoppingLists;
-	}
-
-
-	public void setShoppingLists(List<ShoppingList> shoppingLists) {
-		this.shoppingLists = shoppingLists;
 	}
 
 	public Profile getProfile() {

@@ -14,7 +14,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends LoggingController{
 
     @Autowired
     private UserService userService;
@@ -28,8 +28,10 @@ public class UserController {
         try {
             userService.add(user);
             response = ResponseEntity.ok(user.getToken());
+            logger.info("User created: {}", response.getBody());
         }
         catch (UserAlreadyExistsException ex){
+            logger.error(ex.getMessage());
             ex.printStackTrace();
             response = ResponseEntity.badRequest().body("Usuario existente.");
         }
