@@ -3,6 +3,7 @@ package grupod.desapp.unq.edu.ar.controllers;
 
 import grupod.desapp.unq.edu.ar.model.exceptions.UserAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.user.User;
+import grupod.desapp.unq.edu.ar.security.TokenAuthenticationService;
 import grupod.desapp.unq.edu.ar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,16 +28,18 @@ public class UserController extends LoggingController{
         ResponseEntity response;
         try {
             userService.add(user);
-            response = ResponseEntity.ok(user.getToken());
+            User realUser = userService.login(user);
+            response = ResponseEntity.ok(TokenAuthenticationService.getToken(realUser));
             logger.info("User created: {}", response.getBody());
         }
         catch (UserAlreadyExistsException ex){
-            logger.error(ex.getMessage());
-            ex.printStackTrace();
+            logger.info(ex.getMessage());
             response = ResponseEntity.badRequest().body("Usuario existente.");
         }
         catch (Exception ex) {
             response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar su pedido.");
+            logger.error(ex.getMessage());
+            ex.printStackTrace();
         }
         return response;
     }
@@ -76,15 +79,8 @@ public class UserController extends LoggingController{
      * Return the token for the user.
      */
     @PostMapping(value = "/login")
-    public ResponseEntity login(@RequestBody User user) {
-        String userToken = null;
-        try {
-            userToken = userService.login(user);
-        }
-        catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Username or Password.");
-        }
-        return ResponseEntity.ok(userToken);
+    public ResponseEntity login(@RequestAttribute("token") String token) {
+        return ResponseEntity.ok(token);
     }
 
     /**

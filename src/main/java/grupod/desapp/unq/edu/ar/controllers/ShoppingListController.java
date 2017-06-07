@@ -2,20 +2,13 @@ package grupod.desapp.unq.edu.ar.controllers;
 
 import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
-import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
-import grupod.desapp.unq.edu.ar.model.user.User;
-import grupod.desapp.unq.edu.ar.persistence.ListItemDAO;
-import grupod.desapp.unq.edu.ar.persistence.ProductDAO;
-import grupod.desapp.unq.edu.ar.persistence.ShoppingListDAO;
-import grupod.desapp.unq.edu.ar.persistence.UserDAO;
 import grupod.desapp.unq.edu.ar.services.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController

@@ -14,12 +14,12 @@ public class UserService {
     @Autowired
     private UserDAO userDao;
 
-    public String add(User user) throws UserAlreadyExistsException {
+    public User add(User user) throws UserAlreadyExistsException {
         if(userDao.findByUsername(user.getUsername()) != null){
             throw new UserAlreadyExistsException();
         }
         userDao.save(user);
-        return user.getToken();
+        return user;
     }
 
     public void delete(Long id){
@@ -32,9 +32,8 @@ public class UserService {
         return user.getToken();
     }
 
-    public String login(User user){
-        User result = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-        return result.getToken();
+    public User login(User user){
+        return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 
     public void update(User updated){

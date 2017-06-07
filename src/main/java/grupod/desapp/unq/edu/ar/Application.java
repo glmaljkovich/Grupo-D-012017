@@ -8,6 +8,7 @@ import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
+import grupod.desapp.unq.edu.ar.model.user.AccessLevel;
 import grupod.desapp.unq.edu.ar.model.user.User;
 import grupod.desapp.unq.edu.ar.persistence.*;
 import org.springframework.boot.CommandLineRunner;
@@ -29,6 +30,7 @@ public class Application {
         return (args) -> {
             /*Create User*/
             User user = new User("pepe", "1234", "pepe@gmail");
+            user.setAccessLevel(AccessLevel.ADMIN);
             userDAO.save(user);
 
             /*Create ShoppingList*/

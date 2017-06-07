@@ -1,9 +1,5 @@
 package grupod.desapp.unq.edu.ar.model.user;
 
-import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
-
-import java.util.List;
-
 public class Client extends User {
 	private boolean firstTime;
 	private Profile profile;

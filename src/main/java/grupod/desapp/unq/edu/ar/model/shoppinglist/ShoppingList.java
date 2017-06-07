@@ -18,6 +18,7 @@ public class ShoppingList implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
+	@Column(length = 1000)
 	@JsonProperty(access = WRITE_ONLY)
 	private User user;
 
