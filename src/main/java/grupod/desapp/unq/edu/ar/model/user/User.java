@@ -84,4 +84,8 @@ public class User implements Serializable{
 		return DigestUtils.md5DigestAsHex(hash.getBytes());
 	}
 
+	@Override
+	public String toString() {
+		return this.username;
+	}
 }

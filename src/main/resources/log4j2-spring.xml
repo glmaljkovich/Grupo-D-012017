@@ -1,7 +1,7 @@
 <Configuration monitorInterval="60">
     <Properties>
         <Property name="log-path">logs</Property>
-        <Property name="format">[%-5level] %d{DEFAULT} [%t] %c{1} - %msg%n</Property>
+        <Property name="format">[%-5level] %d{DEFAULT} %c{1} - %msg%n</Property>
     </Properties>
     <Appenders>
         <Console name="Console-Appender" target="SYSTEM_OUT">
@@ -27,10 +27,10 @@
         </File>
         <RollingFile name="Services-File-Appender"
                      fileName="${log-path}/services.log"
-                     filePattern="${log-path}/archived/services.log.%d{yyyy-MM-dd-hh-mm}.gz">
+                     filePattern="${log-path}/archived/services.log.%d{yyyy-MM-dd}.gz">
             <PatternLayout pattern="${format}"/>
             <Policies>
-                <TimeBasedTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy interval="1"/>
                 <SizeBasedTriggeringPolicy size="30 MB"/>
             </Policies>
             <DefaultRolloverStrategy max="30"/>
@@ -41,11 +41,11 @@
             <AppenderRef ref="SpringBoot-File-Appender"/>
             <AppenderRef ref="Console-Appender"/>
         </Logger>
-        <Logger name="grupod.desapp.unq.edu.ar.controllers" level="info" additivity="false">
+        <Logger name="grupod.desapp.unq.edu.ar.controllers" level="debug" additivity="false">
             <AppenderRef ref="Services-File-Appender"/>
             <AppenderRef ref="Console-Appender"/>
         </Logger>
-        <Logger name="grupod.desapp.unq.edu.ar.services" level="info" additivity="false">
+        <Logger name="grupod.desapp.unq.edu.ar.audit" level="info" additivity="false">
             <AppenderRef ref="Services-File-Appender"/>
             <AppenderRef ref="Console-Appender"/>
         </Logger>

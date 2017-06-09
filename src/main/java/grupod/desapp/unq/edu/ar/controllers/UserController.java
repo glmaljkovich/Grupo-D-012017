@@ -30,10 +30,10 @@ public class UserController extends LoggingController{
             userService.add(user);
             User realUser = userService.login(user);
             response = ResponseEntity.ok(TokenAuthenticationService.getToken(realUser));
-            logger.info("User created: {}", response.getBody());
+            logger.debug("User created: {}", response.getBody());
         }
         catch (UserAlreadyExistsException ex){
-            logger.info(ex.getMessage());
+            logger.debug(ex.getMessage());
             response = ResponseEntity.badRequest().body("Usuario existente.");
         }
         catch (Exception ex) {

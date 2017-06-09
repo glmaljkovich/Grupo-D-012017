@@ -1,7 +1,6 @@
 package grupod.desapp.unq.edu.ar.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +14,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.http.HTTPBinding;
 import java.io.IOException;
 import java.util.Collections;
 

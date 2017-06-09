@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by gabriel on 05/06/17.
  */
 @RestController
-public abstract class LoggingController {
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+abstract class LoggingController {
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 }
