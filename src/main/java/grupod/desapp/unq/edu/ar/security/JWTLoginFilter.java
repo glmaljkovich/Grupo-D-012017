@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
@@ -49,7 +50,18 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
         TokenAuthenticationService.addAuthentication(req, res, auth);
-        chain.doFilter(req,res);
+
+        //Add authorization
+        req.setAttribute("Token", res.getHeader("Authorization"));
+        HttpServletRequest wrapped = new HttpServletRequestWrapper(req){
+            @Override
+            public String getHeader(String name) {
+                String header = super.getHeader(name);
+                return (header != null) ? header : super.getAttribute("Token").toString(); // Note: you can't use getParameterValues() here.
+            }
+        };
+
+        chain.doFilter(wrapped,res);
     }
 
     @Override

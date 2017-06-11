@@ -5,6 +5,7 @@ import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.user.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class ShoppingList implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotNull
 	private String name;
 	@Column(length = 1000)
 	@JsonProperty(access = WRITE_ONLY)
@@ -24,8 +26,9 @@ public class ShoppingList implements Serializable{
 
 	@Column
 	@ElementCollection(targetClass=ListItem.class)
+	@NotNull
 	private List<ListItem> list;
-	
+
 	public ShoppingList(String name, User user, List<ListItem> listItem){
 		this.name = name;
 		this.user = user;

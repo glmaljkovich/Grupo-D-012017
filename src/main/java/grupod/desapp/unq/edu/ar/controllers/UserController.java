@@ -47,10 +47,10 @@ public class UserController extends LoggingController{
     /**
      * Delete the user having the passed id.
      */
-    @DeleteMapping(headers = "content-type=application/json")
-    public ResponseEntity delete(long id) {
+    @DeleteMapping(value = "/delete/{username}", headers = "content-type=application/json")
+    public ResponseEntity delete(@PathVariable String username) {
         try {
-           userService.delete(id);
+           userService.delete(username);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("Error deleting the user: it doesn't exist");

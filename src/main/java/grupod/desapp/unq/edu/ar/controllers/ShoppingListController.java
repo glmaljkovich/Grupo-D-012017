@@ -6,6 +6,7 @@ import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 import grupod.desapp.unq.edu.ar.services.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class ShoppingListController {
      * Create a new shoppingList and save it in the database.
      */
     @PostMapping(value = "/{username}", headers = "content-type=application/json")
-    public ResponseEntity create(@RequestBody ShoppingList shoppingList, @PathVariable String username) {
+    public ResponseEntity create(@RequestBody @Validated ShoppingList shoppingList, @PathVariable String username) {
         ShoppingList result;
         try {
             result = shoppingListService.create(shoppingList, username);
@@ -63,8 +64,8 @@ public class ShoppingListController {
     /**
      * Delete the shoppingList having the passed id.
      */
-    @DeleteMapping( headers = "content-type=application/json")
-    public ResponseEntity delete(int id) {
+    @DeleteMapping(value = "/delete/{id}", headers = "content-type=application/json")
+    public ResponseEntity delete(@PathVariable Integer id) {
         try {
             shoppingListService.delete(id);
         }
