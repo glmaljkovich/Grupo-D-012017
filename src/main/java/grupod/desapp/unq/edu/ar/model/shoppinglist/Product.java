@@ -30,12 +30,11 @@ public class Product implements Serializable{
 	}
 	
 	public Product(){
-		//this.category = category;
-		//this.name = name;
-		//this.price = price;
-		//this.stock = stock;
-		//this.brand = brand;
-		//this.image = image;
+
+	}
+
+	public Product(Integer id){
+		this.id = id;
 	}
 	
 	public int getId() {

@@ -39,6 +39,11 @@ public class ShoppingList implements Serializable{
 		this.list = new ArrayList<>();
 	}
 
+	public ShoppingList(String name){
+		this.name = name;
+		this.list = new ArrayList<>();
+	}
+
 	public int getId() {
 		return id;
 	}

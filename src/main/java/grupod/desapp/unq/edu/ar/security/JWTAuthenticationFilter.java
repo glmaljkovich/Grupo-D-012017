@@ -1,6 +1,8 @@
 package grupod.desapp.unq.edu.ar.security;
 
 import io.jsonwebtoken.JwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -19,6 +21,7 @@ import java.io.IOException;
  * Created by gabriel on 06/06/17.
  */
 public class JWTAuthenticationFilter extends GenericFilterBean {
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
@@ -31,8 +34,13 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
                         .setAuthentication(authentication);
 
                 filterChain.doFilter(request,response);
-            }catch (Exception ex){
+            }
+            catch (AuthenticationException|JwtException ex){
                 ((HttpServletResponse) response).sendError(HttpStatus.UNAUTHORIZED.value(), "Your Credentials aren't valid.");
+            }
+            catch (Exception ex){
+                logger.debug(ex.getMessage());
+                ex.printStackTrace();
             }
         }
     }

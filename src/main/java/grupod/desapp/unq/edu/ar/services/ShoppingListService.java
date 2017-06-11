@@ -1,16 +1,14 @@
 package grupod.desapp.unq.edu.ar.services;
 
 import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
-import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
-import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
-import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.*;
 import grupod.desapp.unq.edu.ar.model.user.User;
-import grupod.desapp.unq.edu.ar.persistence.ListItemDAO;
-import grupod.desapp.unq.edu.ar.persistence.ProductDAO;
-import grupod.desapp.unq.edu.ar.persistence.ShoppingListDAO;
-import grupod.desapp.unq.edu.ar.persistence.UserDAO;
+import grupod.desapp.unq.edu.ar.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +21,12 @@ public class ShoppingListService {
 
     @Autowired
     private ShoppingListDAO shoppingListDao;
+
+    @Autowired
+    private ArchivedShoppingListDAO archivedShoppingListDAO;
+
+    @Autowired
+    private ArchivedListItemDAO archivedListItemDAO;
 
     @Autowired
     private ProductDAO productDAO;
@@ -76,5 +80,22 @@ public class ShoppingListService {
     public List<ShoppingList> getShoppingListsForUser(String username){
         User user = userDao.findByUsername(username);
         return shoppingListDao.findByUser(user);
+    }
+
+    public Page<ArchivedShoppingList> getHistoryForUser(String username, Pageable pageable) {
+        return archivedShoppingListDAO.findByUsername(username, pageable);
+    }
+
+    @Transactional
+    public void addToHistory(Integer id) {
+        ShoppingList list               = shoppingListDao.findById(id);
+        ArchivedShoppingList serialized = ShoppingListTransformer.serialize(list);
+        serialized.getItems().forEach(archivedListItem -> archivedListItemDAO.save(archivedListItem));
+        archivedShoppingListDAO.save(serialized);
+    }
+
+    public ShoppingList copy(Integer id) {
+        ArchivedShoppingList list = archivedShoppingListDAO.findById(id);
+        return ShoppingListTransformer.deserialize(list, this);
     }
 }

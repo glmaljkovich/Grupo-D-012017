@@ -24,8 +24,8 @@ public class UserController extends LoggingController{
      * Create a new user and save it in the database.
      */
     @PostMapping(headers = "content-type=application/json")
-    public ResponseEntity create(@RequestBody User user) {
-        ResponseEntity response;
+    public ResponseEntity<String> create(@RequestBody User user) {
+        ResponseEntity<String> response;
         try {
             userService.add(user);
             User realUser = userService.login(user);
@@ -48,7 +48,7 @@ public class UserController extends LoggingController{
      * Delete the user having the passed id.
      */
     @DeleteMapping(value = "/delete/{username}", headers = "content-type=application/json")
-    public ResponseEntity delete(@PathVariable String username) {
+    public ResponseEntity<String> delete(@PathVariable String username) {
         try {
            userService.delete(username);
         }
@@ -63,7 +63,7 @@ public class UserController extends LoggingController{
      * email.
      */
     @GetMapping(value = "/get-by-email")
-    public ResponseEntity getByEmail(String email) {
+    public ResponseEntity<String> getByEmail(String email) {
         String token;
         try {
             token = userService.findByEmail(email);
@@ -79,7 +79,7 @@ public class UserController extends LoggingController{
      * Return the token for the user.
      */
     @PostMapping(value = "/login")
-    public ResponseEntity login(@RequestAttribute("token") String token) {
+    public ResponseEntity<String> login(@RequestAttribute("token") String token) {
         return ResponseEntity.ok(token);
     }
 
@@ -88,7 +88,7 @@ public class UserController extends LoggingController{
      * database having the passed id.
      */
     @RequestMapping(method = PUT, headers = "content-type=application/json")
-    public ResponseEntity updateUser(@RequestBody User updated) {
+    public ResponseEntity<String> updateUser(@RequestBody User updated) {
         try {
             userService.update(updated);
         }
