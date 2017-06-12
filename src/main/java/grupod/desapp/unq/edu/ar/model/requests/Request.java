@@ -28,7 +28,7 @@ public class Request implements Serializable{
 	public Request(Client client, ShoppingList shoppingList) {
 		this.client = client;
 		this.shoppingList = shoppingList;
-		this.setDuration();
+		this.initializeDuration();
 	}
 
 	public int getId() {
@@ -39,7 +39,7 @@ public class Request implements Serializable{
 		this.id = id;
 	}
 
-	private void setDuration(){
+	public void initializeDuration(){
 		this.getList().forEach(product -> duration += product.getTime());
 	}
 

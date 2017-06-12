@@ -44,6 +44,7 @@ public class Application {
                 product.setName(String.format("Producto %d", i));
                 product.setBrand(String.format("Marca %d", i));
                 product.setPrice(new Price(10,50));
+                product.setTime(i*10);
                 productDAO.save(product);
                 ListItem item = new ListItem(product, i);
                 listItemDAO.save(item);

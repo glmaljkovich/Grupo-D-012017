@@ -37,12 +37,17 @@ public class CashRegisterService {
     @Transactional
     public CashRegister checkout(Request request) throws NoCashRegisterAvailableException{
         User client = userDao.findByUsername(request.getClient().getUsername());
+
         request.setClient(client);
         ShoppingList list = shoppingListDao.findById(request.getShoppingList().getId());
         request.setShoppingList(list);
+        request.initializeDuration();
         requestsDAO.save(request);
+
         CashRegister register = new RequestManager(cashRegisterDAO.findAll()).getCashRegisterWithLesserWaitingTime(request);
         register.addRequest(request);
+
+        cashRegisterDAO.save(register);
 
         Integer id = request.getShoppingList().getId();
 

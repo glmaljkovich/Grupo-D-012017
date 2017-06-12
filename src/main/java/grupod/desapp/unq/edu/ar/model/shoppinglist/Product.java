@@ -1,9 +1,12 @@
 package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import grupod.desapp.unq.edu.ar.model.Price;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
 @Entity
 @Table(name = "products")
@@ -17,6 +20,7 @@ public class Product implements Serializable{
 	private Price price;
 	private String image;
 	private String category;
+	@JsonProperty(access = READ_ONLY)
 	private int time;
 	
 	public Product(int id, String name, String brand, int stock, Price price, String image, String category){
@@ -27,10 +31,11 @@ public class Product implements Serializable{
 		this.price = price;
 		this.image = image;
 		this.category = category;
+		this.time = 10;
 	}
 	
 	public Product(){
-
+		this.time = 10;
 	}
 
 	public Product(Integer id){

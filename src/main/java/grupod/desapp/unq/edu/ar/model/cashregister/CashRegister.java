@@ -46,11 +46,11 @@ public class CashRegister implements Serializable{
 	}
 
 	private void decreaseWaitingTime(int duration){
-		this.waitingTime -= duration;
+		this.waitingTime = this.waitingTime - duration;
 	}
 
 	private void increaseWaitingTime(int duration){
-		this.waitingTime+=duration;
+		this.waitingTime = this.waitingTime + duration;
 	}
 	
 	public void removeRequest(Request request){
