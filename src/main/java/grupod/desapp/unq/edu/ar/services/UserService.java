@@ -4,6 +4,8 @@ import grupod.desapp.unq.edu.ar.model.exceptions.UserAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.user.User;
 import grupod.desapp.unq.edu.ar.persistence.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,8 +34,11 @@ public class UserService {
         return user.getToken();
     }
 
-    public User login(User user){
-        return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    public User login(User user) throws AuthenticationException{
+        User existent = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        if(existent == null)
+            throw new BadCredentialsException("Invalid Username or Password.");
+        return existent;
     }
 
     public void update(User updated){

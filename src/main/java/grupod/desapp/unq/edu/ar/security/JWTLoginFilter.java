@@ -1,7 +1,9 @@
 package grupod.desapp.unq.edu.ar.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -41,7 +43,13 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                 creds.getPassword(),
                 Collections.emptyList()
         );
-        return getAuthenticationManager().authenticate(user);
+        Authentication auti = null;
+        try{
+            auti = getAuthenticationManager().authenticate(user);
+        }catch(BadCredentialsException ex){
+            res.sendError(HttpStatus.UNAUTHORIZED.value(), "flashaste");
+        }
+        return auti;
     }
 
     @Override

@@ -23,19 +23,11 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserService userService;
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Override
     public Authentication authenticate( Authentication authentication) throws AuthenticationException {
-        try{
             User user = new User((String) authentication.getPrincipal(), (String) authentication.getCredentials(), "");
             User loggedUser = userService.login(user);
             return new UsernamePasswordAuthenticationToken(loggedUser.getUsername(), loggedUser.getPassword(), Arrays.asList(new SimpleGrantedAuthority(loggedUser.getAccessLevel().toString())));
-        } catch(Exception ex){
-            logger.error(ex.toString());
-            ex.printStackTrace();
-            throw new BadCredentialsException("Invalid Username or Password.");
-        }
     }
 
     @Override

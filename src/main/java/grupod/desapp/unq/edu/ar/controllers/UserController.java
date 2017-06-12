@@ -8,6 +8,7 @@ import grupod.desapp.unq.edu.ar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
@@ -79,8 +80,14 @@ public class UserController extends LoggingController{
      * Return the token for the user.
      */
     @PostMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestAttribute("token") String token) {
-        return ResponseEntity.ok(token);
+    public ResponseEntity<String> login(@RequestBody User user) {
+        User existent;
+        try{
+            existent = userService.login(user);
+        } catch (AuthenticationException ex){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+        }
+        return ResponseEntity.ok(TokenAuthenticationService.getToken(existent));
     }
 
     /**
