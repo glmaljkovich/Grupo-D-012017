@@ -28,7 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // And filter other requests to check the presence of JWT in header
@@ -43,6 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/user").antMatchers("/user/login");
+        web.ignoring().antMatchers("/user")
+                      .antMatchers("/user/login")
+                      .antMatchers("/");
     }
 }
