@@ -44,7 +44,7 @@ public class Application {
                 product.setName(String.format("Producto %d", i));
                 product.setBrand(String.format("Marca %d", i));
                 product.setPrice(new Price(10,50));
-                product.setTime(i*10);
+                product.setTime(i*5);
                 productDAO.save(product);
                 ListItem item = new ListItem(product, i);
                 listItemDAO.save(item);
@@ -58,7 +58,7 @@ public class Application {
             /*Create Cash Registers*/
             IntStream.range(1, 5).forEach(i -> {
                 CashRegister register = new CashRegister();
-                register.setWaitingTime(i*100);
+                register.setWaitingTime(i*10);
                 cashRegisterDAO.save(register);
             });
 
