@@ -106,4 +106,20 @@ public class UserController extends LoggingController{
         return ResponseEntity.ok("User succesfully updated!");
     }
 
+    /**
+     * Return the token for the user having the passed
+     * email.
+     */
+    @GetMapping(value = "/profile/{username}")
+    public ResponseEntity<String> getProfile(@PathVariable String username) {
+
+        try {
+            String empty = "";
+        }
+        catch (Exception ex) {
+            return ResponseEntity.badRequest().body("User profile not found");
+        }
+        return ResponseEntity.ok("perfil");
+    }
+
 }
