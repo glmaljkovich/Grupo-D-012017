@@ -52,12 +52,13 @@ public class ProductController extends LoggingController{
 
     @PostMapping("/upload")
     public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
+        Integer count = 0;
         try {
-            productService.uploadProducts(file);
+            count = productService.uploadProducts(file);
         } catch (IOException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
         }
-        return ResponseEntity.ok("Archivos subidos correctamente");
+        return ResponseEntity.ok(count.toString() + " productos subidos correctamente");
     }
 }

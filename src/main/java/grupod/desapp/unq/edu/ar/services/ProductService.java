@@ -30,7 +30,7 @@ public class ProductService {
         return productDAO.findProductsByNameContainingOrBrandContainingAllIgnoreCase(criteria, criteria,pageable);
     }
 
-    public void uploadProducts(MultipartFile file) throws IOException {
+    public Integer uploadProducts(MultipartFile file) throws IOException {
         String input = new String(file.getBytes());
         ObjectMapper mapper = new ObjectMapper();
         Product[] readValue = mapper.readValue(input, Product[].class);
@@ -42,5 +42,6 @@ public class ProductService {
             }
             productDAO.save(product);
         });
+        return products.size();
     }
 }
