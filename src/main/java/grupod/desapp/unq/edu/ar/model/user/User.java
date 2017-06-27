@@ -21,6 +21,9 @@ public class User implements Serializable{
 	private String password;
 	private String email;
 	private AccessLevel accessLevel;
+	private boolean firstTime;
+	@Column(length = 1000)
+	private Profile profile;
 	
 	public User(){
 		this.accessLevel = AccessLevel.CLIENT;
@@ -76,6 +79,22 @@ public class User implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isFirstTime() {
+		return firstTime;
+	}
+
+	public void setFirstTime(boolean firstTime) {
+		this.firstTime = firstTime;
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 
 	public String getToken(){

@@ -2,6 +2,7 @@ package grupod.desapp.unq.edu.ar.controllers;
 
 
 import grupod.desapp.unq.edu.ar.model.exceptions.UserAlreadyExistsException;
+import grupod.desapp.unq.edu.ar.model.user.Profile;
 import grupod.desapp.unq.edu.ar.model.user.User;
 import grupod.desapp.unq.edu.ar.security.TokenAuthenticationService;
 import grupod.desapp.unq.edu.ar.services.UserService;
@@ -46,7 +47,7 @@ public class UserController extends LoggingController{
     }
 
     /**
-     * Delete the user having the passed id.
+     * Delete the user having the passed username.
      */
     @DeleteMapping(value = "/delete/{username}", headers = "content-type=application/json")
     public ResponseEntity<String> delete(@PathVariable String username) {
@@ -92,7 +93,7 @@ public class UserController extends LoggingController{
 
     /**
      * Update the email and the name for the user in the
-     * database having the passed id.
+     * database.
      */
     @RequestMapping(method = PUT, headers = "content-type=application/json")
     public ResponseEntity<String> updateUser(@RequestBody User updated) {
@@ -107,19 +108,32 @@ public class UserController extends LoggingController{
     }
 
     /**
-     * Return the token for the user having the passed
-     * email.
+     * Get Profile
      */
     @GetMapping(value = "/profile/{username}")
-    public ResponseEntity<String> getProfile(@PathVariable String username) {
-
+    public ResponseEntity getProfile(@PathVariable String username) {
+        Profile profile;
         try {
-            String empty = "";
+            profile = userService.getProfile(username);
         }
         catch (Exception ex) {
             return ResponseEntity.badRequest().body("User profile not found");
         }
-        return ResponseEntity.ok("perfil");
+        return ResponseEntity.ok(profile);
+    }
+
+    /**
+     * Update Profile
+     */
+    @PutMapping(value = "/profile")
+    public ResponseEntity updateProfile(@RequestBody Profile profile) {
+        try {
+            userService.updateProfile(profile);
+        }
+        catch (Exception ex) {
+            return ResponseEntity.badRequest().body("User profile not found");
+        }
+        return ResponseEntity.ok("Datos actualizados correctamente");
     }
 
 }

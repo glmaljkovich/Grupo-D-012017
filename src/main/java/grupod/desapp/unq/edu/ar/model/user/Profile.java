@@ -2,22 +2,40 @@ package grupod.desapp.unq.edu.ar.model.user;
 
 import grupod.desapp.unq.edu.ar.model.Threshold;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Profile {
+@Entity
+@Table(name = "profiles")
+public class Profile implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String address;
     private String name;
     private String lastName;
+    @Column
+    @ElementCollection(targetClass=Threshold.class)
     private List<Threshold> thresholds;
 
     public Profile() {
-
+        this.thresholds = new ArrayList<>();
     }
 
     public Profile(String name, String lastName, String address) {
         this.address    = address;
         this.name       = name;
         this.lastName   = lastName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAddress() {

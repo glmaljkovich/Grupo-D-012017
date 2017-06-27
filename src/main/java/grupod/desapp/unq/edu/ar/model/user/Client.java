@@ -18,7 +18,6 @@ public class Client extends User {
 		return firstTime;
 	}
 
-
 	public void setFirstTime(boolean firstTime) {
 		this.firstTime = firstTime;
 	}
