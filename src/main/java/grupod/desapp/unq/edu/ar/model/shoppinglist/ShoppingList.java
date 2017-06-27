@@ -18,13 +18,15 @@ public class ShoppingList implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotNull
 	private String name;
-	@Column(length = 1000)
+	@Column(length = 2000)
 	@JsonProperty(access = WRITE_ONLY)
 	private User user;
 
 	@Column
 	@ElementCollection(targetClass=ListItem.class)
+	@NotNull
 	private List<ListItem> list;
 
 	public ShoppingList(String name, User user, List<ListItem> listItem){
