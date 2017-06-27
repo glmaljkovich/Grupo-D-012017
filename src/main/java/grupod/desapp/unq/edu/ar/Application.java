@@ -29,7 +29,7 @@ public class Application {
     public CommandLineRunner demo(ProductDAO productDAO, UserDAO userDAO, ShoppingListDAO shoppingListDAO, ListItemDAO listItemDAO, CashRegisterDAO cashRegisterDAO) {
         return (args) -> {
             /*Create User*/
-            User user = new User("pepe", "1234", "pepe@gmail");
+            User user = new User("pepe27", "1234", "pe@pe.com");
             user.setAccessLevel(AccessLevel.ADMIN);
             userDAO.save(user);
 

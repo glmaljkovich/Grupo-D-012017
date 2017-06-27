@@ -22,9 +22,9 @@ import java.util.List;
 @Service
 public class TokenAuthenticationService {
     static final long EXPIRATIONTIME = 864_000_000; // 10 days
-    static final String SECRET = "totallynot1234";
-    static final String BEARER = "Bearer ";
-    static final String AUTHORIZATION = "Authorization";
+    private static final String SECRET = "totallynot1234";
+    private static final String BEARER = "Bearer ";
+    private static final String AUTHORIZATION = "Authorization";
 
     public static void addAuthentication(HttpServletRequest req, HttpServletResponse res, Authentication auth) {
         String JWT = Jwts.builder()

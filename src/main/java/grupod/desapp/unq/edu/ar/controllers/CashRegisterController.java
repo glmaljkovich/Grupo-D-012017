@@ -24,12 +24,14 @@ public class CashRegisterController {
      * Return a cash register id and waiting time.
      */
     @PostMapping
-    public ResponseEntity checkout(@RequestBody Request request) {
+    public ResponseEntity<CashRegister> checkout(@RequestBody Request request) {
         CashRegister register;
         try {
             register = cashRegisterService.checkout(request);
         } catch (NoCashRegisterAvailableException e) {
             e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (Exception ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
         return ResponseEntity.ok(register);
