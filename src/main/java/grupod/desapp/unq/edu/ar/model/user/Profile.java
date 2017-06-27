@@ -16,6 +16,8 @@ public class Profile implements Serializable{
     private String address;
     private String name;
     private String lastName;
+    private Float latitude;
+    private Float longitude;
     @Column
     @ElementCollection(targetClass=Threshold.class)
     private List<Threshold> thresholds;
@@ -36,6 +38,22 @@ public class Profile implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
+    public Float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
     }
 
     public String getAddress() {
