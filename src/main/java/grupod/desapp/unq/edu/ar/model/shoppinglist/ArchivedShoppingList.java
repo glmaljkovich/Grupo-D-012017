@@ -1,7 +1,6 @@
 package grupod.desapp.unq.edu.ar.model.shoppinglist;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import grupod.desapp.unq.edu.ar.model.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

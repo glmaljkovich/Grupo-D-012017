@@ -1,8 +1,6 @@
 package grupod.desapp.unq.edu.ar.controllers;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ArchivedShoppingList;
-import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 import grupod.desapp.unq.edu.ar.services.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

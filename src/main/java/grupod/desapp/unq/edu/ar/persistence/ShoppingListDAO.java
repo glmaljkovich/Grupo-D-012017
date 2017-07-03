@@ -5,7 +5,6 @@ import grupod.desapp.unq.edu.ar.model.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
 
 @Transactional

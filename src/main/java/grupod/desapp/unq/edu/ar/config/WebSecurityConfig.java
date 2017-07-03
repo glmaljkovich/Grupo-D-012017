@@ -1,7 +1,6 @@
 package grupod.desapp.unq.edu.ar.config;
 
 import grupod.desapp.unq.edu.ar.security.JWTAuthenticationFilter;
-import grupod.desapp.unq.edu.ar.security.JWTLoginFilter;
 import grupod.desapp.unq.edu.ar.security.UserAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

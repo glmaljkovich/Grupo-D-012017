@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,15 +22,18 @@ public class ProductService {
     @Autowired
     private ProductDAO productDAO;
 
+    @Transactional
     public Integer addProduct(Product product){
         Product saved = productDAO.save(product);
         return saved.getId();
     }
 
+    @Transactional
     public Page<Product> find(String criteria, Pageable pageable){
         return productDAO.findProductsByNameContainingOrBrandContainingAllIgnoreCase(criteria, criteria,pageable);
     }
 
+    @Transactional
     public Integer uploadProducts(MultipartFile file) throws IOException {
         String input = new String(file.getBytes());
         ObjectMapper mapper = new ObjectMapper();

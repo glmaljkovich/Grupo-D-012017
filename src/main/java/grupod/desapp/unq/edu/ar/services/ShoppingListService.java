@@ -37,6 +37,7 @@ public class ShoppingListService {
     @Autowired
     private UserDAO userDao;
 
+    @Transactional
     public void addItem(Integer id, ListItem item) throws ItemAlreadyExistsException {
         ShoppingList list = shoppingListDao.findById(id);
         Product product = productDAO.findById(item.getProduct().getId());
@@ -46,6 +47,7 @@ public class ShoppingListService {
         shoppingListDao.save(list);
     }
 
+    @Transactional
     public void update(ShoppingList shoppingList){
         ShoppingList laPosta = shoppingListDao.findById(shoppingList.getId());
         List<ListItem> items = shoppingList.getItems().stream().map(item -> {
@@ -62,26 +64,31 @@ public class ShoppingListService {
         shoppingListDao.save(laPosta);
     }
 
+    @Transactional
     public ShoppingList create(ShoppingList shoppingList, String username){
         User user = userDao.findByUsername(username);
         shoppingList.setUser(user);
         return shoppingListDao.save(shoppingList);
     }
 
+    @Transactional
     public void delete(Integer id){
         ShoppingList shoppingList = shoppingListDao.findById(id);
         shoppingListDao.delete(shoppingList);
     }
 
+    @Transactional
     public ShoppingList findById(Integer id){
         return  shoppingListDao.findById(id);
     }
 
+    @Transactional
     public List<ShoppingList> getShoppingListsForUser(String username){
         User user = userDao.findByUsername(username);
         return shoppingListDao.findByUser(user);
     }
 
+    @Transactional
     public Page<ArchivedShoppingList> getHistoryForUser(String username, Pageable pageable) {
         return archivedShoppingListDAO.findByUsername(username, pageable);
     }
@@ -94,6 +101,7 @@ public class ShoppingListService {
         archivedShoppingListDAO.save(serialized);
     }
 
+    @Transactional
     public ShoppingList copy(Integer id) {
         ArchivedShoppingList list = archivedShoppingListDAO.findById(id);
         return ShoppingListTransformer.deserialize(list, this);

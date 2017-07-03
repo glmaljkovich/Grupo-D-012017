@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by gabriel on 23/05/17.
@@ -21,6 +22,7 @@ public class UserService {
     @Autowired
     private ProfileDAO profileDAO;
 
+    @Transactional
     public User add(User user) throws UserAlreadyExistsException {
         if(userDao.findByUsername(user.getUsername()) != null){
             throw new UserAlreadyExistsException();
@@ -32,16 +34,19 @@ public class UserService {
         return user;
     }
 
+    @Transactional
     public void delete(String username){
         User user = userDao.findByUsername(username);
         userDao.delete(user);
     }
 
+    @Transactional
     public String findByEmail(String email){
         User user = userDao.findByEmail(email);
         return user.getToken();
     }
 
+    @Transactional
     public User login(User user) throws AuthenticationException{
         User existent = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if(existent == null)
@@ -49,6 +54,7 @@ public class UserService {
         return existent;
     }
 
+    @Transactional
     public void update(User updated){
         User user = userDao.findOne(updated.getId());
         user.setEmail(updated.getEmail());
@@ -56,6 +62,7 @@ public class UserService {
         userDao.save(user);
     }
 
+    @Transactional
     public Profile getProfile(String username){
         User user = userDao.findByUsername(username);
         Profile profile = user.getProfile();
@@ -64,6 +71,7 @@ public class UserService {
         return null;
     }
 
+    @Transactional
     public void updateProfile(Profile profile){
         profileDAO.save(profile);
     }
