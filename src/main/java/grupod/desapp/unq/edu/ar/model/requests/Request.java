@@ -15,7 +15,7 @@ public class Request implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private  int id;
-	@Column(length = 1000)
+	@Column(length = 2000)
 	private User client;
 	@Column(length = 2000)
 	private ShoppingList shoppingList;
