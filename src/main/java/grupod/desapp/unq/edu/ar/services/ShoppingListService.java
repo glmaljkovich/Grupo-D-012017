@@ -113,11 +113,16 @@ public class ShoppingListService {
         ShoppingList list               = shoppingListDao.findById(id);
         ListItem first                  = list.getItems().get(0);
 
+        List<Integer> originalPIDS = list.getItems()
+                .stream()
+                .map(listItem -> listItem.getProduct().getId())
+                .collect(Collectors.toList());
+
         ArchivedShoppingList firstMatch = getArchivedShoppingListsWithItem(first).get(0);
 
         List<Integer> productIds = firstMatch.getItems()
                 .stream()
-                .filter(listItem -> listItem.getProductID() != first.getProduct().getId())
+                .filter(listItem -> !originalPIDS.contains(listItem.getProductID()))
                 .map(ArchivedListItem::getProductID)
                 .collect(Collectors.toList());
 
