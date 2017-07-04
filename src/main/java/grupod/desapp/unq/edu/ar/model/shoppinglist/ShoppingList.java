@@ -26,7 +26,6 @@ public class ShoppingList implements Serializable{
 
 	@Column
 	@ElementCollection(targetClass=ListItem.class)
-	@NotNull
 	private List<ListItem> list;
 
 	public ShoppingList(String name, User user, List<ListItem> listItem){
