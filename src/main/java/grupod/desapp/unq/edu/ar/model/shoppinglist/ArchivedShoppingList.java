@@ -70,4 +70,8 @@ public class ArchivedShoppingList implements Serializable{
     public void setItems(List<ArchivedListItem> list) {
         this.list = list;
     }
+
+    public boolean hasItem(ListItem item){
+        return list.stream().anyMatch(element -> element.getProductID() == item.getProduct().getId());
+    }
 }

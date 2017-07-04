@@ -112,17 +112,31 @@ public class ShoppingListService {
     public List<Product> getRecommendedProducts(Integer id){
         ShoppingList list               = shoppingListDao.findById(id);
         ListItem first                  = list.getItems().get(0);
-        //Get All shoppinglists
-        ArrayList<ShoppingList> others  = new ArrayList<>();
-        shoppingListDao.findAll().iterator().forEachRemaining(shoplist -> others.add(shoplist));
 
-        ShoppingList firstMatch = others.stream()
-                                        .filter(lista -> lista.getId() != id && lista.hasItem(first))
-                                        .collect(Collectors.toList()).get(0);
-        return firstMatch.getItems()
-                         .stream()
-                         .filter(listItem -> listItem.getId() != first.getId())
-                         .map(listItem -> listItem.getProduct())
+        ArchivedShoppingList firstMatch = getArchivedShoppingListsWithItem(first).get(0);
+
+        List<Integer> productIds = firstMatch.getItems()
+                .stream()
+                .filter(listItem -> listItem.getProductID() != first.getProduct().getId())
+                .map(ArchivedListItem::getProductID)
+                .collect(Collectors.toList());
+
+        return productIds.stream()
+                         .map(pid -> productDAO.findById(pid))
                          .collect(Collectors.toList());
+    }
+
+    private List<ArchivedShoppingList> getArchivedShoppingListsWithItem(ListItem first) {
+        return getArchivedShoppingLists()
+                .stream()
+                .filter(lista -> lista.hasItem(first))
+                .collect(Collectors.toList());
+    }
+
+    private ArrayList<ArchivedShoppingList> getArchivedShoppingLists() {
+        //Get All archived shoppinglists
+        ArrayList<ArchivedShoppingList> others  = new ArrayList<>();
+        archivedShoppingListDAO.findAll().iterator().forEachRemaining(others::add);
+        return others;
     }
 }
