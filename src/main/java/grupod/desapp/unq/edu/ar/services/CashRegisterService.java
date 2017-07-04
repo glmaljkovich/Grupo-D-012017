@@ -40,6 +40,8 @@ public class CashRegisterService {
 
         request.setClient(client);
         ShoppingList list = shoppingListDao.findById(request.getShoppingList().getId());
+        list.setUser(client);
+        shoppingListDao.save(list);
         request.setShoppingList(list);
         request.initializeDuration();
         requestsDAO.save(request);
