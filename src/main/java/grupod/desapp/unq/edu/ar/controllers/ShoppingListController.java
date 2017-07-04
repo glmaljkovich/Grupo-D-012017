@@ -2,6 +2,7 @@ package grupod.desapp.unq.edu.ar.controllers;
 
 import grupod.desapp.unq.edu.ar.model.exceptions.ItemAlreadyExistsException;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ListItem;
+import grupod.desapp.unq.edu.ar.model.shoppinglist.Product;
 import grupod.desapp.unq.edu.ar.model.shoppinglist.ShoppingList;
 import grupod.desapp.unq.edu.ar.services.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -88,6 +90,21 @@ public class ShoppingListController {
             return ResponseEntity.badRequest().body("ShoppingList not found");
         }
         return ResponseEntity.ok(shopList);
+    }
+
+    /**
+     * Return a shoppinglist
+     */
+    @GetMapping("/recommended/{id}")
+    public ResponseEntity getRecommendedProducts(@PathVariable int id) {
+        List<Product> products;
+        try {
+            products = shoppingListService.getRecommendedProducts(id);
+        }
+        catch (Exception ex) {
+            return ResponseEntity.ok(new ArrayList<>());
+        }
+        return ResponseEntity.ok(products);
     }
     
     /**

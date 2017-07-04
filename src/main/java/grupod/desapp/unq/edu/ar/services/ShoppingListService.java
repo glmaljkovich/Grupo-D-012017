@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -105,5 +106,23 @@ public class ShoppingListService {
     public ShoppingList copy(Integer id) {
         ArchivedShoppingList list = archivedShoppingListDAO.findById(id);
         return ShoppingListTransformer.deserialize(list, this);
+    }
+
+    @Transactional
+    public List<Product> getRecommendedProducts(Integer id){
+        ShoppingList list               = shoppingListDao.findById(id);
+        ListItem first                  = list.getItems().get(0);
+        //Get All shoppinglists
+        ArrayList<ShoppingList> others  = new ArrayList<>();
+        shoppingListDao.findAll().iterator().forEachRemaining(shoplist -> others.add(shoplist));
+
+        ShoppingList firstMatch = others.stream()
+                                        .filter(lista -> lista.getId() != id && lista.hasItem(first))
+                                        .collect(Collectors.toList()).get(0);
+        return firstMatch.getItems()
+                         .stream()
+                         .filter(listItem -> listItem.getId() != first.getId())
+                         .map(listItem -> listItem.getProduct())
+                         .collect(Collectors.toList());
     }
 }
