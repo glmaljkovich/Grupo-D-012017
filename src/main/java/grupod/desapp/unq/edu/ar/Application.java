@@ -30,8 +30,13 @@ public class Application {
         return (args) -> {
             /*Create User*/
             User user = new User("pepe27", "1234", "pe@pe.com");
+            User user2 = new User("u950", "1234", "u950@yopp.io");
+            User user3 = new User("glmaljkovich", "1234", "glmaljkovich@yopp.io");
             user.setAccessLevel(AccessLevel.ADMIN);
+            user3.setAccessLevel(AccessLevel.ADMIN);
             userDAO.save(user);
+            userDAO.save(user2);
+            userDAO.save(user3);
 
             /*Create ShoppingList*/
             ShoppingList list = new ShoppingList();
