@@ -17,7 +17,7 @@ public class Request implements Serializable{
 	private  int id;
 	@Column(length = 2000)
 	private User client;
-	@Column(length = 2000)
+	@Column(length = 3000)
 	private ShoppingList shoppingList;
 	private int duration;
 	
